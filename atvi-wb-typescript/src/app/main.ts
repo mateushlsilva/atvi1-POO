@@ -3,6 +3,7 @@ import Empresa from "../modelo/empresa"
 import CadastroCliente from "../negocio/cadastroCliente";
 import CadastroProdutos from "../negocio/CadastroProdutos";
 import CadastroServicos from "../negocio/CadastroServicos";
+import ExcluirCliente from "../negocio/deletarCliente";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/ListagemProdutos";
 import ListagemServicos from "../negocio/ListagemServicos";
@@ -15,10 +16,11 @@ while (execucao) {
     console.log(`Opções:`);
     console.log(`1 - Cadastrar cliente`);
     console.log(`2 - Listar todos os clientes`);
-    console.log(`3 - Cadastrar Produto`);
-    console.log(`4 - Listar todos os produtos`);
-    console.log(`5 - Cadastrar Serviços`);
-    console.log(`6 - Listar todos os Serviços`);
+    console.log(`3 - Excluir clientes`);
+    console.log(`4 - Cadastrar Produto`);
+    console.log(`5 - Listar todos os produtos`);
+    console.log(`6 - Cadastrar Serviços`);
+    console.log(`7 - Listar todos os Serviços`);
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -34,18 +36,22 @@ while (execucao) {
             listagem.listar()
             break;
         case 3:
+            let exclusao = new ExcluirCliente(empresa.getClientes)
+            exclusao.Exclui()
+            break;
+        case 4:
             let cadastrarProd = new CadastroProdutos(empresa.getProdutos)
             cadastrarProd.cadastrar()
             break;
-        case 4:
+        case 5:
             let listagemProd = new ListagemProdutos(empresa.getProdutos)
             listagemProd.listar()
             break;
-        case 5:
+        case 6:
             let cadastrarSer = new CadastroServicos(empresa.getServicos)
             cadastrarSer.cadastrar()
             break
-        case 6:
+        case 7:
             let listagemSer = new ListagemServicos(empresa.getServicos)
             listagemSer.listar()
             break
