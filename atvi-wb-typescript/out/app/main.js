@@ -5,9 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var entrada_1 = __importDefault(require("../io/entrada"));
 var empresa_1 = __importDefault(require("../modelo/empresa"));
+var atualizarCliente_1 = __importDefault(require("../negocio/atualizarCliente"));
 var cadastroCliente_1 = __importDefault(require("../negocio/cadastroCliente"));
 var CadastroProdutos_1 = __importDefault(require("../negocio/CadastroProdutos"));
 var CadastroServicos_1 = __importDefault(require("../negocio/CadastroServicos"));
+var deletarCliente_1 = __importDefault(require("../negocio/deletarCliente"));
 var listagemClientes_1 = __importDefault(require("../negocio/listagemClientes"));
 var ListagemProdutos_1 = __importDefault(require("../negocio/ListagemProdutos"));
 var ListagemServicos_1 = __importDefault(require("../negocio/ListagemServicos"));
@@ -18,10 +20,12 @@ while (execucao) {
     console.log("Op\u00E7\u00F5es:");
     console.log("1 - Cadastrar cliente");
     console.log("2 - Listar todos os clientes");
-    console.log("3 - Cadastrar Produto");
-    console.log("4 - Listar todos os produtos");
-    console.log("5 - Cadastrar Servi\u00E7os");
-    console.log("6 - Listar todos os Servi\u00E7os");
+    console.log("3 - Atualizar clientes");
+    console.log("4 - Excluir clientes");
+    console.log("5 - Cadastrar Produto");
+    console.log("6 - Listar todos os produtos");
+    console.log("7 - Cadastrar Servi\u00E7os");
+    console.log("8 - Listar todos os Servi\u00E7os");
     console.log("0 - Sair");
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -35,18 +39,26 @@ while (execucao) {
             listagem.listar();
             break;
         case 3:
+            var atualizar = new atualizarCliente_1.default(empresa.getClientes);
+            atualizar.atualiza();
+            break;
+        case 4:
+            var exclusao = new deletarCliente_1.default(empresa.getClientes);
+            exclusao.Exclui();
+            break;
+        case 5:
             var cadastrarProd = new CadastroProdutos_1.default(empresa.getProdutos);
             cadastrarProd.cadastrar();
             break;
-        case 4:
+        case 6:
             var listagemProd = new ListagemProdutos_1.default(empresa.getProdutos);
             listagemProd.listar();
             break;
-        case 5:
+        case 7:
             var cadastrarSer = new CadastroServicos_1.default(empresa.getServicos);
             cadastrarSer.cadastrar();
             break;
-        case 6:
+        case 8:
             var listagemSer = new ListagemServicos_1.default(empresa.getServicos);
             listagemSer.listar();
             break;

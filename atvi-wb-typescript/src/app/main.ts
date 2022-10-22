@@ -1,5 +1,6 @@
 import Entrada from "../io/entrada";
 import Empresa from "../modelo/empresa"
+import AtualizarCliente from "../negocio/atualizarCliente";
 import CadastroCliente from "../negocio/cadastroCliente";
 import CadastroProdutos from "../negocio/CadastroProdutos";
 import CadastroServicos from "../negocio/CadastroServicos";
@@ -16,11 +17,12 @@ while (execucao) {
     console.log(`Opções:`);
     console.log(`1 - Cadastrar cliente`);
     console.log(`2 - Listar todos os clientes`);
-    console.log(`3 - Excluir clientes`);
-    console.log(`4 - Cadastrar Produto`);
-    console.log(`5 - Listar todos os produtos`);
-    console.log(`6 - Cadastrar Serviços`);
-    console.log(`7 - Listar todos os Serviços`);
+    console.log(`3 - Atualizar clientes`);
+    console.log(`4 - Excluir clientes`);
+    console.log(`5 - Cadastrar Produto`);
+    console.log(`6 - Listar todos os produtos`);
+    console.log(`7 - Cadastrar Serviços`);
+    console.log(`8 - Listar todos os Serviços`);
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -36,22 +38,26 @@ while (execucao) {
             listagem.listar()
             break;
         case 3:
+            let atualizar = new AtualizarCliente(empresa.getClientes)
+            atualizar.atualiza()
+            break;
+        case 4:
             let exclusao = new ExcluirCliente(empresa.getClientes)
             exclusao.Exclui()
             break;
-        case 4:
+        case 5:
             let cadastrarProd = new CadastroProdutos(empresa.getProdutos)
             cadastrarProd.cadastrar()
             break;
-        case 5:
+        case 6:
             let listagemProd = new ListagemProdutos(empresa.getProdutos)
             listagemProd.listar()
             break;
-        case 6:
+        case 7:
             let cadastrarSer = new CadastroServicos(empresa.getServicos)
             cadastrarSer.cadastrar()
             break
-        case 7:
+        case 8:
             let listagemSer = new ListagemServicos(empresa.getServicos)
             listagemSer.listar()
             break
