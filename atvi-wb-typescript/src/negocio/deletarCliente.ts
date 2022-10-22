@@ -15,9 +15,10 @@ export default class ExcluirCliente extends Excluir {
 
     public Exclui(): void {
         console.log(`\nInício da Exclusão do cliente`);
+        executa = true
         while (executa){
             let busca = this.entrada.receberTexto(`Por favor informe o número do cpf do cliente: `);
-            let cont = 0
+            let cont = 1
             this.clientes.forEach(cliente =>{
                 if (cliente.getCpf.getValor == busca){
                     console.log(`Cliente encontrado, nome: ${cliente.nome}, deseja realmente excluir o cliente? `);
@@ -25,7 +26,7 @@ export default class ExcluirCliente extends Excluir {
                     switch(confirma){
                         case 1:
                             let indice = this.clientes.indexOf(cliente)
-                            this.clientes.slice(indice, 1)
+                            this.clientes.splice(indice, 1)
                             console.log(`Cliente excluido!`);
                             executa = false
                             break;
@@ -38,6 +39,7 @@ export default class ExcluirCliente extends Excluir {
                 }
                 else if(cont == this.clientes.length){
                     console.log(`\n nenhum cliente encontrado com o cpf informado!!! \n`); 
+                    executa = false
                 }
                 else{
                     cont++

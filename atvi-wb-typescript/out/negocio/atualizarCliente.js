@@ -32,7 +32,7 @@ var AtualizarCliente = /** @class */ (function (_super) {
         var _this = this;
         console.log("\nIn\u00EDcio da atualiza\u00E7\u00E3o do cliente");
         var busca = this.entrada.receberTexto("Por favor informe o n\u00FAmero do cpf do cliente: ");
-        var cont = 0;
+        var cont = 1;
         this.clientes.forEach(function (cliente) {
             if (cliente.getCpf.getValor == busca) {
                 console.log("Cliente encontrado, forne\u00E7a as informa\u00E7\u00F5es:");
@@ -40,7 +40,6 @@ var AtualizarCliente = /** @class */ (function (_super) {
                 var nomeSocial = _this.entrada.receberTexto("Por favor informe o nome social do cliente: ");
                 cliente.nome = nome;
                 cliente.nomeSocial = nomeSocial;
-                // this.clientes.push(cliente)
                 console.log("\nCadastro atualizado :)\n");
             }
             else if (cont == _this.clientes.length) {

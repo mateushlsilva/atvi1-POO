@@ -32,17 +32,18 @@ var ExcluirCliente = /** @class */ (function (_super) {
     ExcluirCliente.prototype.Exclui = function () {
         var _this = this;
         console.log("\nIn\u00EDcio da Exclus\u00E3o do cliente");
+        executa = true;
         var _loop_1 = function () {
             var busca = this_1.entrada.receberTexto("Por favor informe o n\u00FAmero do cpf do cliente: ");
-            var cont = 0;
+            var cont = 1;
             this_1.clientes.forEach(function (cliente) {
                 if (cliente.getCpf.getValor == busca) {
-                    console.log("Cliente encontrado, nome: ".concat(cliente.nome, ", deseja realmente excluir o cliente?"));
-                    var confirma = _this.entrada.receberNumero("1 - excluir, 2 - cancelar");
+                    console.log("Cliente encontrado, nome: ".concat(cliente.nome, ", deseja realmente excluir o cliente? "));
+                    var confirma = _this.entrada.receberNumero("1 - excluir, 2 - cancelar: ");
                     switch (confirma) {
                         case 1:
                             var indice = _this.clientes.indexOf(cliente);
-                            _this.clientes.slice(indice, 1);
+                            _this.clientes.splice(indice, 1);
                             console.log("Cliente excluido!");
                             executa = false;
                             break;
@@ -54,6 +55,7 @@ var ExcluirCliente = /** @class */ (function (_super) {
                 }
                 else if (cont == _this.clientes.length) {
                     console.log("\n nenhum cliente encontrado com o cpf informado!!! \n");
+                    executa = false;
                 }
                 else {
                     cont++;
