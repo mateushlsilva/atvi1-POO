@@ -17,6 +17,7 @@ export default class ExcluirProduto extends Excluir {
         console.log(`\nInício da Exclusão do Produto`);
         while (executa){
             let busca = this.entrada.receberTexto(`Por favor informe o nome do Produto: `);
+            let cont = 1
             this.produtos.forEach(produto =>{
                 if (produto.nome == busca){
                     console.log(`Produto encontrado, deseja realmente excluir o Produto?`);
@@ -24,18 +25,23 @@ export default class ExcluirProduto extends Excluir {
                     switch(confirma){
                         case 1:
                             let indice = this.produtos.indexOf(produto)
-                            this.produtos.slice(indice, 1)
+                            this.produtos.splice(indice, 1)
                             console.log(`Produto excluido!`);
-                            break
+                            executa = false
+                            break;
                         case 2:
                             executa = false
                             console.log(`cancelado`);
-                            break
+                            break;
                             
                     }
                 }
-                else{
+                else if(cont == this.produtos.length){
                     console.log(`\n nenhum Produto encontrado com o nome informado!!! \n`); 
+                    executa = false
+                }
+                else{
+                    cont++
                 }
             })
                 
