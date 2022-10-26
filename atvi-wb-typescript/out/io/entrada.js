@@ -16,7 +16,8 @@ var Entrada = /** @class */ (function () {
     Entrada.prototype.receberTexto = function (mensagem) {
         var prompt = (0, prompt_sync_1.default)();
         var texto = prompt(mensagem);
-        return texto;
+        var resto = texto.slice(1, texto.length);
+        return texto[0].toUpperCase() + resto.toLowerCase();
     };
     return Entrada;
 }());

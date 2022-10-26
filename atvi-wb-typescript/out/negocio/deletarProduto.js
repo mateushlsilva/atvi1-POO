@@ -32,17 +32,20 @@ var ExcluirProduto = /** @class */ (function (_super) {
     ExcluirProduto.prototype.Exclui = function () {
         var _this = this;
         console.log("\nIn\u00EDcio da Exclus\u00E3o do Produto");
+        executa = true;
         var _loop_1 = function () {
             var busca = this_1.entrada.receberTexto("Por favor informe o nome do Produto: ");
+            var cont = 1;
             this_1.produtos.forEach(function (produto) {
                 if (produto.nome == busca) {
                     console.log("Produto encontrado, deseja realmente excluir o Produto?");
-                    var confirma = _this.entrada.receberNumero("1 - excluir, 2 - cancelar");
+                    var confirma = _this.entrada.receberNumero("1 - excluir, 2 - cancelar: ");
                     switch (confirma) {
                         case 1:
                             var indice = _this.produtos.indexOf(produto);
-                            _this.produtos.slice(indice, 1);
+                            _this.produtos.splice(indice, 1);
                             console.log("Produto excluido!");
+                            executa = false;
                             break;
                         case 2:
                             executa = false;
@@ -50,8 +53,12 @@ var ExcluirProduto = /** @class */ (function (_super) {
                             break;
                     }
                 }
-                else {
+                else if (cont == _this.produtos.length) {
                     console.log("\n nenhum Produto encontrado com o nome informado!!! \n");
+                    executa = false;
+                }
+                else {
+                    cont++;
                 }
             });
         };

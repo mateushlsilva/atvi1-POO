@@ -5,12 +5,13 @@ import Atualizar from "./atualizar";
 export default class AtualizarServicos extends Atualizar{
     private servicos:Array<Servico>
     private entrada: Entrada
-    constructor(servicos:Array<Servico>, entrada: Entrada){
+    constructor(servicos:Array<Servico>){
         super()
         this.servicos = servicos
-        this.entrada = entrada
+        this.entrada =  new Entrada()
     }
     public atualiza(): void {
+        let cont = 1
         console.log(`\nInício da atualização do Serviço`);
         let busca = this.entrada.receberTexto(`Por favor informe o nome do Serviço: `);
         this.servicos.forEach(servico =>{
@@ -18,13 +19,15 @@ export default class AtualizarServicos extends Atualizar{
                 console.log(`Serviço encontrado, forneça as informações:`);
                 let nome = this.entrada.receberTexto(`Por favor informe o nome do Serviço: `)
                 servico.nome = nome
-                this.servicos.push(servico)
+                
                 console.log(`\nCadastro atualizado :)\n`);
             }
-            else{
+            else if(cont == this.servicos.length){
                 console.log(`\n nenhum Serviço encontrado com o nome informado!!! \n`); 
             }
-                      
+            else{
+                cont++
+            }       
         })
         
         

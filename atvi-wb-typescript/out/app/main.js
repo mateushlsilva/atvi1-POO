@@ -6,10 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var entrada_1 = __importDefault(require("../io/entrada"));
 var empresa_1 = __importDefault(require("../modelo/empresa"));
 var atualizarCliente_1 = __importDefault(require("../negocio/atualizarCliente"));
+var atualizarProduto_1 = __importDefault(require("../negocio/atualizarProduto"));
+var atualizarServicos_1 = __importDefault(require("../negocio/atualizarServicos"));
 var cadastroCliente_1 = __importDefault(require("../negocio/cadastroCliente"));
 var CadastroProdutos_1 = __importDefault(require("../negocio/CadastroProdutos"));
 var CadastroServicos_1 = __importDefault(require("../negocio/CadastroServicos"));
 var deletarCliente_1 = __importDefault(require("../negocio/deletarCliente"));
+var deletarProduto_1 = __importDefault(require("../negocio/deletarProduto"));
+var deletarServico_1 = __importDefault(require("../negocio/deletarServico"));
 var listagemClientes_1 = __importDefault(require("../negocio/listagemClientes"));
 var ListagemProdutos_1 = __importDefault(require("../negocio/ListagemProdutos"));
 var ListagemServicos_1 = __importDefault(require("../negocio/ListagemServicos"));
@@ -24,8 +28,12 @@ while (execucao) {
     console.log("4 - Excluir clientes");
     console.log("5 - Cadastrar Produto");
     console.log("6 - Listar todos os produtos");
-    console.log("7 - Cadastrar Servi\u00E7os");
-    console.log("8 - Listar todos os Servi\u00E7os");
+    console.log("7 - Atualizar produtos");
+    console.log("8 - Excluir produtos");
+    console.log("9 - Cadastrar Servi\u00E7os");
+    console.log("10 - Listar todos os Servi\u00E7os");
+    console.log("11 - Atualizar servi\u00E7os");
+    console.log("12 - Excluir servi\u00E7os");
     console.log("0 - Sair");
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -55,12 +63,28 @@ while (execucao) {
             listagemProd.listar();
             break;
         case 7:
+            var atualizarProdutos = new atualizarProduto_1.default(empresa.getProdutos);
+            atualizarProdutos.atualiza();
+            break;
+        case 8:
+            var exclusaoProduto = new deletarProduto_1.default(empresa.getProdutos);
+            exclusaoProduto.Exclui();
+            break;
+        case 9:
             var cadastrarSer = new CadastroServicos_1.default(empresa.getServicos);
             cadastrarSer.cadastrar();
             break;
-        case 8:
+        case 10:
             var listagemSer = new ListagemServicos_1.default(empresa.getServicos);
             listagemSer.listar();
+            break;
+        case 11:
+            var atualizaSer = new atualizarServicos_1.default(empresa.getServicos);
+            atualizaSer.atualiza();
+            break;
+        case 12:
+            var excluirSer = new deletarServico_1.default(empresa.getServicos);
+            excluirSer.Exclui();
             break;
         case 0:
             execucao = false;

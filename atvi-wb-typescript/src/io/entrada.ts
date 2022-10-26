@@ -9,6 +9,7 @@ export default class Entrada {
     public receberTexto(mensagem: string): string {
         let prompt = promptSync();
         let texto = prompt(mensagem)
-        return texto
+        let resto = texto.slice(1,texto.length)
+        return texto[0].toUpperCase()+resto.toLowerCase()
     }
 }

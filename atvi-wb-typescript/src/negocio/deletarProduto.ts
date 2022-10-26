@@ -15,13 +15,14 @@ export default class ExcluirProduto extends Excluir {
 
     public Exclui(): void {
         console.log(`\nInício da Exclusão do Produto`);
+        executa = true
         while (executa){
             let busca = this.entrada.receberTexto(`Por favor informe o nome do Produto: `);
             let cont = 1
             this.produtos.forEach(produto =>{
                 if (produto.nome == busca){
                     console.log(`Produto encontrado, deseja realmente excluir o Produto?`);
-                    let confirma = this.entrada.receberNumero(`1 - excluir, 2 - cancelar`)
+                    let confirma = this.entrada.receberNumero(`1 - excluir, 2 - cancelar: `)
                     switch(confirma){
                         case 1:
                             let indice = this.produtos.indexOf(produto)

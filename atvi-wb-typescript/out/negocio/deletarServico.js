@@ -32,17 +32,20 @@ var ExcluirServico = /** @class */ (function (_super) {
     ExcluirServico.prototype.Exclui = function () {
         var _this = this;
         console.log("\nIn\u00EDcio da Exclus\u00E3o do Servi\u00E7o");
+        executa = true;
         var _loop_1 = function () {
             var busca = this_1.entrada.receberTexto("Por favor informe o nome do Servi\u00E7o: ");
+            var cont = 1;
             this_1.servicos.forEach(function (servico) {
                 if (servico.nome == busca) {
                     console.log("Servi\u00E7o encontrado, deseja realmente excluir o Servi\u00E7o?");
-                    var confirma = _this.entrada.receberNumero("1 - excluir, 2 - cancelar");
+                    var confirma = _this.entrada.receberNumero("1 - excluir, 2 - cancelar: ");
                     switch (confirma) {
                         case 1:
                             var indice = _this.servicos.indexOf(servico);
-                            _this.servicos.slice(indice, 1);
+                            _this.servicos.splice(indice, 1);
                             console.log("Servi\u00E7o excluido!");
+                            executa = false;
                             break;
                         case 2:
                             executa = false;
@@ -50,8 +53,12 @@ var ExcluirServico = /** @class */ (function (_super) {
                             break;
                     }
                 }
-                else {
+                else if (cont == _this.servicos.length) {
                     console.log("\n nenhum Servi\u00E7o encontrado com o nome informado!!! \n");
+                    executa = false;
+                }
+                else {
+                    cont++;
                 }
             });
         };

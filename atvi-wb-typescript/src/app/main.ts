@@ -2,11 +2,13 @@ import Entrada from "../io/entrada";
 import Empresa from "../modelo/empresa"
 import AtualizarCliente from "../negocio/atualizarCliente";
 import AtualizarProdutos from "../negocio/atualizarProduto";
+import AtualizarServicos from "../negocio/atualizarServicos";
 import CadastroCliente from "../negocio/cadastroCliente";
 import CadastroProdutos from "../negocio/CadastroProdutos";
 import CadastroServicos from "../negocio/CadastroServicos";
 import ExcluirCliente from "../negocio/deletarCliente";
 import ExcluirProduto from "../negocio/deletarProduto";
+import ExcluirServico from "../negocio/deletarServico";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/ListagemProdutos";
 import ListagemServicos from "../negocio/ListagemServicos";
@@ -27,6 +29,9 @@ while (execucao) {
     console.log(`8 - Excluir produtos`);
     console.log(`9 - Cadastrar Serviços`);
     console.log(`10 - Listar todos os Serviços`);
+    console.log(`11 - Atualizar serviços`);
+    console.log(`12 - Excluir serviços`);
+    
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -72,6 +77,14 @@ while (execucao) {
         case 10:
             let listagemSer = new ListagemServicos(empresa.getServicos)
             listagemSer.listar()
+            break
+        case 11:
+            let atualizaSer = new AtualizarServicos(empresa.getServicos)
+            atualizaSer.atualiza()
+            break
+        case 12:
+            let excluirSer = new ExcluirServico(empresa.getServicos)
+            excluirSer.Exclui()
             break
         case 0:
             execucao = false
