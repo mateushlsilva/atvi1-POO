@@ -34,8 +34,8 @@ var CadastroCliente = /** @class */ (function (_super) {
         console.log("\nIn\u00EDcio do cadastro do cliente");
         var nome = this.entrada.receberTexto("Por favor informe o nome do cliente: ");
         var nomeSocial = this.entrada.receberTexto("Por favor informe o nome social do cliente: ");
-        var valor = this.entrada.receberTexto("Por favor informe o n\u00FAmero do cpf: ");
-        var data = this.entrada.receberTexto("Por favor informe a data de emiss\u00E3o do cpf, no padr\u00E3o dd/mm/yyyy: ");
+        var valor = this.entrada.receberCpf("Por favor informe o n\u00FAmero do cpf, no padr\u00E3o 00000000000: ");
+        var data = this.entrada.receberData("Por favor informe a data de emiss\u00E3o do cpf, no padr\u00E3o dd/mm/yyyy: ");
         var partesData = data.split('/');
         var ano = new Number(partesData[2].valueOf()).valueOf();
         var mes = new Number(partesData[1].valueOf()).valueOf();

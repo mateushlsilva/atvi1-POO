@@ -13,6 +13,63 @@ var Entrada = /** @class */ (function () {
         var numero = new Number(valor);
         return numero.valueOf();
     };
+    Entrada.prototype.receberData = function (mensagem) {
+        var prompt = (0, prompt_sync_1.default)();
+        var exe = true;
+        while (exe) {
+            var valor = prompt(mensagem);
+            var data = valor.replace(/[^0-9]/g, '');
+            if (valor == "") {
+                console.log("Esse campo é obrigatorio!");
+                exe = true;
+            }
+            else if (valor.replace(/[^0-9]/g, '').length < 8) {
+                console.log("Esse campo não pode ser menor que 8 digitos! E deve conter apénas números!");
+                exe = true;
+            }
+            else if (valor.replace(/[^0-9]/g, '').length > 8) {
+                console.log("Esse campo não pode ser maior que 8 digitos!");
+                exe = true;
+            }
+            else if (Number(data.slice(0, 2)) > 31) {
+                console.log("O dia não pode ser superior a 31!");
+                exe = true;
+            }
+            else if (Number(data.slice(2, 4)) > 12) {
+                console.log("O mês não pode ser superior a 12!");
+                exe = true;
+            }
+            else {
+                exe = false;
+                return data.slice(0, 2) + "/" + data.slice(2, 4) + "/" + data.slice(4, 8);
+            }
+        }
+        return "";
+    };
+    Entrada.prototype.receberCpf = function (mensagem) {
+        var prompt = (0, prompt_sync_1.default)();
+        var exe = true;
+        while (exe) {
+            var valor = prompt(mensagem);
+            if (valor == "") {
+                console.log("Esse campo é obrigatorio!");
+                exe = true;
+            }
+            else if (valor.replace(/[^0-9]/g, '').length < 11) {
+                console.log("Esse campo não pode ser menor que 11 digitos! E deve conter apénas números!");
+                exe = true;
+            }
+            else if (valor.replace(/[^0-9]/g, '').length > 11) {
+                console.log("Esse campo não pode ser maior que 11 digitos!");
+                exe = true;
+            }
+            else {
+                exe = false;
+                return valor.replace(/[^0-9]/g, '');
+            }
+        }
+        return "";
+    };
     Entrada.prototype.receberTexto = function (mensagem) {
         var prompt = (0, prompt_sync_1.default)();
         var exe = true;
