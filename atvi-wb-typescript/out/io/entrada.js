@@ -24,7 +24,7 @@ var Entrada = /** @class */ (function () {
                 exe = true;
             }
             else if (valor.replace(/[^0-9]/g, '').length < 8) {
-                console.log("Esse campo não pode ser menor que 8 digitos! E deve conter apénas números!");
+                console.log("Esse campo não pode ser menor que 8 digitos! E deve conter apenas números!");
                 exe = true;
             }
             else if (valor.replace(/[^0-9]/g, '').length > 8) {
@@ -37,6 +37,10 @@ var Entrada = /** @class */ (function () {
             }
             else if (Number(data.slice(2, 4)) > 12) {
                 console.log("O mês não pode ser superior a 12!");
+                exe = true;
+            }
+            else if (Number(data.slice(2, 4)) == 2 && Number(data.slice(0, 2)) > 29) {
+                console.log("O dia não pode ser superior a 29 em fevereiro!");
                 exe = true;
             }
             else {
@@ -56,7 +60,7 @@ var Entrada = /** @class */ (function () {
                 exe = true;
             }
             else if (valor.replace(/[^0-9]/g, '').length < 11) {
-                console.log("Esse campo não pode ser menor que 11 digitos! E deve conter apénas números!");
+                console.log("Esse campo não pode ser menor que 11 digitos! E deve conter apenas números!");
                 exe = true;
             }
             else if (valor.replace(/[^0-9]/g, '').length > 11) {

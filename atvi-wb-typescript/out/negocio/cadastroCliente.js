@@ -21,12 +21,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var entrada_1 = __importDefault(require("../io/entrada"));
 var cliente_1 = __importDefault(require("../modelo/cliente"));
 var cpf_1 = __importDefault(require("../modelo/cpf"));
+var rg_1 = __importDefault(require("../modelo/rg"));
 var cadastro_1 = __importDefault(require("./cadastro"));
 var CadastroCliente = /** @class */ (function (_super) {
     __extends(CadastroCliente, _super);
     function CadastroCliente(clientes) {
         var _this = _super.call(this) || this;
         _this.clientes = clientes;
+        // this.rgs = rgs
         _this.entrada = new entrada_1.default();
         return _this;
     }
@@ -34,6 +36,13 @@ var CadastroCliente = /** @class */ (function (_super) {
         console.log("\nIn\u00EDcio do cadastro do cliente");
         var nome = this.entrada.receberTexto("Por favor informe o nome do cliente: ");
         var nomeSocial = this.entrada.receberTexto("Por favor informe o nome social do cliente: ");
+        var rgValor = this.entrada.receberTexto("Por favor informe o RG do cliente: ");
+        var dataRg = this.entrada.receberData("Por favor informe a data de emiss\u00E3o do RG, no padr\u00E3o dd/mm/yyyy: ");
+        var partesDataRg = dataRg.split('/');
+        var anoRg = new Number(partesDataRg[2].valueOf()).valueOf();
+        var mesRg = new Number(partesDataRg[1].valueOf()).valueOf();
+        var diaRg = new Number(partesDataRg[0].valueOf()).valueOf();
+        var dataEmissaoRg = new Date(anoRg, mesRg, diaRg);
         var valor = this.entrada.receberCpf("Por favor informe o n\u00FAmero do cpf, no padr\u00E3o 00000000000: ");
         var data = this.entrada.receberData("Por favor informe a data de emiss\u00E3o do cpf, no padr\u00E3o dd/mm/yyyy: ");
         var partesData = data.split('/');
@@ -42,7 +51,10 @@ var CadastroCliente = /** @class */ (function (_super) {
         var dia = new Number(partesData[0].valueOf()).valueOf();
         var dataEmissao = new Date(ano, mes, dia);
         var cpf = new cpf_1.default(valor, dataEmissao);
+        var rg = new rg_1.default(rgValor, dataEmissaoRg);
+        // this.rgs.push(rg)
         var cliente = new cliente_1.default(nome, nomeSocial, cpf);
+        cliente.addRg(rg);
         this.clientes.push(cliente);
         console.log("\nCadastro conclu\u00EDdo :)\n");
     };

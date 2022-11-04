@@ -53,6 +53,9 @@ var Cliente = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Cliente.prototype.addRg = function (rg) {
+        this.rgs.push(rg);
+    };
     return Cliente;
 }());
 exports.default = Cliente;

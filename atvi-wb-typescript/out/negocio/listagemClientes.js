@@ -32,6 +32,9 @@ var ListagemClientes = /** @class */ (function (_super) {
             console.log("Nome: " + cliente.nome);
             console.log("Nome social: " + cliente.nomeSocial);
             console.log("CPF: " + cliente.getCpf.getValor);
+            cliente.getRgs.forEach(function (rg) {
+                console.log("RG: ".concat(rg.getValor));
+            });
             console.log("--------------------------------------");
         });
         console.log("\n");
