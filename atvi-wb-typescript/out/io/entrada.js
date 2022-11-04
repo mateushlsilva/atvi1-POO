@@ -95,6 +95,30 @@ var Entrada = /** @class */ (function () {
         }
         return "Como você chegou aqui???";
     };
+    Entrada.prototype.receberGenero = function (mensagem) {
+        var prompt = (0, prompt_sync_1.default)();
+        var exe = true;
+        while (exe) {
+            var texto = prompt(mensagem);
+            if (texto == "") {
+                console.log("Esse campo é obrigatorio!");
+                exe = true;
+            }
+            else if (texto[0].toUpperCase() == 'M') {
+                exe = false;
+                return 'Masculino';
+            }
+            else if (texto[0].toUpperCase() == 'F') {
+                exe = false;
+                return 'Feminino';
+            }
+            else {
+                console.log("Esse campo não pode receber gênero diferente de Masculino e Feminino no exato momento!");
+                exe = true;
+            }
+        }
+        return "Como você chegou aqui???";
+    };
     return Entrada;
 }());
 exports.default = Entrada;

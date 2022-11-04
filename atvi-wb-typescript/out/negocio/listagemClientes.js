@@ -31,6 +31,7 @@ var ListagemClientes = /** @class */ (function (_super) {
         this.clientes.forEach(function (cliente) {
             console.log("Nome: " + cliente.nome);
             console.log("Nome social: " + cliente.nomeSocial);
+            console.log("G\u00EAnero: ".concat(cliente.genero));
             console.log("CPF: " + cliente.getCpf.getValor);
             cliente.getRgs.forEach(function (rg) {
                 console.log("RG: ".concat(rg.getValor));

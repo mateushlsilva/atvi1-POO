@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Cliente = /** @class */ (function () {
-    function Cliente(nome, nomeSocial, cpf) {
+    function Cliente(nome, nomeSocial, cpf, genero) {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
+        this.genero = genero;
         this.cpf = cpf;
         this.rgs = [];
         this.dataCadastro = new Date();
@@ -55,6 +56,9 @@ var Cliente = /** @class */ (function () {
     });
     Cliente.prototype.addRg = function (rg) {
         this.rgs.push(rg);
+    };
+    Cliente.prototype.addTelefones = function (telefone) {
+        this.telefones.push(telefone);
     };
     return Cliente;
 }());

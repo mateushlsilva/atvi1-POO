@@ -1,4 +1,6 @@
 import Cliente from "../modelo/cliente";
+import CPF from "../modelo/cpf";
+import RG from "../modelo/rg";
 import Listagem from "./listagem";
 
 export default class ListagemClientes extends Listagem {
@@ -12,6 +14,7 @@ export default class ListagemClientes extends Listagem {
         this.clientes.forEach(cliente => {
             console.log(`Nome: ` + cliente.nome);
             console.log(`Nome social: ` + cliente.nomeSocial);
+            console.log(`Gênero: ${cliente.genero}`);
             console.log(`CPF: ` + cliente.getCpf.getValor);
             cliente.getRgs.forEach(rg => {
                 console.log(`RG: ${rg.getValor}`);

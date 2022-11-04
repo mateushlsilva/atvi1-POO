@@ -36,6 +36,8 @@ var CadastroCliente = /** @class */ (function (_super) {
         console.log("\nIn\u00EDcio do cadastro do cliente");
         var nome = this.entrada.receberTexto("Por favor informe o nome do cliente: ");
         var nomeSocial = this.entrada.receberTexto("Por favor informe o nome social do cliente: ");
+        var genero = this.entrada.receberGenero("Por favor informe o g\u00EAnero do cliente: ['M' ou 'F'] ");
+        // RG
         var rgValor = this.entrada.receberTexto("Por favor informe o RG do cliente: ");
         var dataRg = this.entrada.receberData("Por favor informe a data de emiss\u00E3o do RG, no padr\u00E3o dd/mm/yyyy: ");
         var partesDataRg = dataRg.split('/');
@@ -43,6 +45,7 @@ var CadastroCliente = /** @class */ (function (_super) {
         var mesRg = new Number(partesDataRg[1].valueOf()).valueOf();
         var diaRg = new Number(partesDataRg[0].valueOf()).valueOf();
         var dataEmissaoRg = new Date(anoRg, mesRg, diaRg);
+        // CPF
         var valor = this.entrada.receberCpf("Por favor informe o n\u00FAmero do cpf, no padr\u00E3o 00000000000: ");
         var data = this.entrada.receberData("Por favor informe a data de emiss\u00E3o do cpf, no padr\u00E3o dd/mm/yyyy: ");
         var partesData = data.split('/');
@@ -53,7 +56,7 @@ var CadastroCliente = /** @class */ (function (_super) {
         var cpf = new cpf_1.default(valor, dataEmissao);
         var rg = new rg_1.default(rgValor, dataEmissaoRg);
         // this.rgs.push(rg)
-        var cliente = new cliente_1.default(nome, nomeSocial, cpf);
+        var cliente = new cliente_1.default(nome, nomeSocial, cpf, genero);
         cliente.addRg(rg);
         this.clientes.push(cliente);
         console.log("\nCadastro conclu\u00EDdo :)\n");

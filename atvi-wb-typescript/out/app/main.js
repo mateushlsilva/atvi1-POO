@@ -4,7 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var entrada_1 = __importDefault(require("../io/entrada"));
+var cliente_1 = __importDefault(require("../modelo/cliente"));
+var cpf_1 = __importDefault(require("../modelo/cpf"));
 var empresa_1 = __importDefault(require("../modelo/empresa"));
+var rg_1 = __importDefault(require("../modelo/rg"));
 var atualizarCliente_1 = __importDefault(require("../negocio/atualizarCliente"));
 var atualizarProduto_1 = __importDefault(require("../negocio/atualizarProduto"));
 var atualizarServicos_1 = __importDefault(require("../negocio/atualizarServicos"));
@@ -19,6 +22,35 @@ var ListagemProdutos_1 = __importDefault(require("../negocio/ListagemProdutos"))
 var ListagemServicos_1 = __importDefault(require("../negocio/ListagemServicos"));
 console.log("Bem-vindo ao cadastro de clientes do Grupo World Beauty");
 var empresa = new empresa_1.default();
+// Clientes cadastrados antes do programa
+var cli1 = new cliente_1.default('Gustavo', 'Gusta gol', new cpf_1.default('45454545454', new Date(12, 12, 1221)), 'Masculino');
+var cli2 = new cliente_1.default('Arnaldo', 'Arnaldo César', new cpf_1.default('89421565454', new Date(12, 12, 1221)), 'Masculino');
+var cli3 = new cliente_1.default('Maria', 'Maria Joaquina', new cpf_1.default('49478542453', new Date(12, 12, 1221)), 'Feminino');
+var cli4 = new cliente_1.default('Guliano', 'Guliano', new cpf_1.default('73454542354', new Date(12, 12, 1221)), 'Masculino');
+var cli5 = new cliente_1.default('Vasco', 'Gigante', new cpf_1.default('28426645454', new Date(12, 12, 1221)), 'Masculino');
+var cli6 = new cliente_1.default('Lucimara', 'Lucimara', new cpf_1.default('39454475554', new Date(12, 12, 1221)), 'Feminino');
+var cli7 = new cliente_1.default('Ayanokoji', 'Ayanokoji', new cpf_1.default('14454877456', new Date(12, 12, 1221)), 'Masculino');
+var cli8 = new cliente_1.default('Kei', 'Kei Karuizawa', new cpf_1.default('52452245451', new Date(12, 12, 1221)), 'Feminino');
+var cli9 = new cliente_1.default('Ichigo', 'Ichigo', new cpf_1.default('11454445458', new Date(12, 12, 1221)), 'Masculino');
+cli1.addRg(new rg_1.default('58951348', new Date(20, 12, 2000)));
+cli2.addRg(new rg_1.default('89522146', new Date(20, 12, 2000)));
+cli3.addRg(new rg_1.default('77572727', new Date(20, 12, 2000)));
+cli4.addRg(new rg_1.default('53475527', new Date(20, 12, 2000)));
+cli5.addRg(new rg_1.default('71466984', new Date(20, 12, 2000)));
+cli6.addRg(new rg_1.default('39845464', new Date(20, 12, 2000)));
+cli7.addRg(new rg_1.default('87214654', new Date(20, 12, 2000)));
+cli8.addRg(new rg_1.default('44874668', new Date(20, 12, 2000)));
+cli9.addRg(new rg_1.default('52115576', new Date(20, 12, 2000)));
+empresa.getClientes.push(cli1);
+empresa.getClientes.push(cli2);
+empresa.getClientes.push(cli3);
+empresa.getClientes.push(cli4);
+empresa.getClientes.push(cli5);
+empresa.getClientes.push(cli6);
+empresa.getClientes.push(cli7);
+empresa.getClientes.push(cli8);
+empresa.getClientes.push(cli9);
+// FIM
 var execucao = true;
 while (execucao) {
     console.log("Op\u00E7\u00F5es:");

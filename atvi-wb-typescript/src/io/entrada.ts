@@ -78,4 +78,28 @@ export default class Entrada {
         }
         return "Como você chegou aqui???"
     }
+
+    public receberGenero(mensagem: string): string{
+        let prompt = promptSync();
+        let exe = true
+        while (exe) {
+            let texto = prompt(mensagem)
+            if (texto == ""){
+                console.log("Esse campo é obrigatorio!");
+                exe = true
+            }else if(texto[0].toUpperCase() == 'M'){
+                exe = false
+                return 'Masculino'
+            }else if(texto[0].toUpperCase() == 'F'){
+                exe = false
+                return 'Feminino'
+            }
+            else{
+                console.log("Esse campo não pode receber gênero diferente de Masculino e Feminino no exato momento!");
+                exe = true
+            }
+        }
+        return "Como você chegou aqui???"
+    }
+    
 }
