@@ -60,6 +60,12 @@ var Cliente = /** @class */ (function () {
     Cliente.prototype.addTelefones = function (telefone) {
         this.telefones.push(telefone);
     };
+    Cliente.prototype.addProduto = function (produto) {
+        this.produtosConsumidos.push(produto);
+    };
+    Cliente.prototype.addServico = function (servico) {
+        this.servicosConsumidos.push(servico);
+    };
     return Cliente;
 }());
 exports.default = Cliente;

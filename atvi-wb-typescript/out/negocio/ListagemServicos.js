@@ -29,8 +29,8 @@ var ListagemServicos = /** @class */ (function (_super) {
     ListagemServicos.prototype.listar = function () {
         console.log("\nLista de todos os servi\u00E7os:");
         this.servicos.forEach(function (servicos) {
-            console.log("Nome: " + servicos.nome);
             console.log("--------------------------------------");
+            console.log("Nome: " + servicos.nome);
         });
         console.log("\n");
     };

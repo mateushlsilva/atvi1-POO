@@ -29,8 +29,8 @@ var ListagemProdutos = /** @class */ (function (_super) {
     ListagemProdutos.prototype.listar = function () {
         console.log("\nLista de todos os produtos:");
         this.produtos.forEach(function (produtos) {
-            console.log("Nome: " + produtos.nome);
             console.log("--------------------------------------");
+            console.log("Nome: " + produtos.nome);
         });
         console.log("\n");
     };

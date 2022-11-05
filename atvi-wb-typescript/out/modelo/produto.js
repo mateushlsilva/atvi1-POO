@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Produto = /** @class */ (function () {
-    function Produto() {
+    function Produto(nome) {
+        this.nome = nome;
     }
     return Produto;
 }());

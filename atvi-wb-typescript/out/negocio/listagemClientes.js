@@ -36,6 +36,12 @@ var ListagemClientes = /** @class */ (function (_super) {
             cliente.getRgs.forEach(function (rg) {
                 console.log("RG: ".concat(rg.getValor));
             });
+            cliente.getProdutosConsumidos.forEach(function (prod) {
+                console.log("Produtos consumidos: " + prod.nome);
+            });
+            cliente.getServicosConsumidos.forEach(function (ser) {
+                console.log("Servi\u00E7os consumidos: " + ser.nome);
+            });
             console.log("--------------------------------------");
         });
         console.log("\n");

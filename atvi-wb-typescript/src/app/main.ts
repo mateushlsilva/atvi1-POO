@@ -2,16 +2,20 @@ import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
 import Empresa from "../modelo/empresa"
+import Produto from "../modelo/produto";
 import RG from "../modelo/rg";
+import Servico from "../modelo/servico";
 import AtualizarCliente from "../negocio/atualizarCliente";
 import AtualizarProdutos from "../negocio/atualizarProduto";
 import AtualizarServicos from "../negocio/atualizarServicos";
 import CadastroCliente from "../negocio/cadastroCliente";
+import CadastroConsumoCliente from "../negocio/CadastroConsumoCliente";
 import CadastroProdutos from "../negocio/CadastroProdutos";
 import CadastroServicos from "../negocio/CadastroServicos";
 import ExcluirCliente from "../negocio/deletarCliente";
 import ExcluirProduto from "../negocio/deletarProduto";
 import ExcluirServico from "../negocio/deletarServico";
+import ListagemGenero from "../negocio/listagem/ListagemGenero";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/ListagemProdutos";
 import ListagemServicos from "../negocio/ListagemServicos";
@@ -50,6 +54,42 @@ empresa.getClientes.push(cli6)
 empresa.getClientes.push(cli7)
 empresa.getClientes.push(cli8)
 empresa.getClientes.push(cli9)
+
+let servico1 = new Servico("Corte")
+let servico2 = new Servico("Remoção de rugas")
+let servico3 = new Servico("Remoção  de manchas na pele")
+
+empresa.getServicos.push(servico1)
+empresa.getServicos.push(servico2)
+empresa.getServicos.push(servico3)
+
+let produto1 = new Produto("Pomada")
+let produto2 = new Produto("Condicionador")
+let produto3 = new Produto("Creme")
+
+empresa.getProdutos.push(produto1)
+empresa.getProdutos.push(produto2)
+empresa.getProdutos.push(produto3)
+
+cli1.addProduto(produto1)
+cli2.addProduto(produto2)
+cli3.addProduto(produto3)
+cli4.addProduto(produto2)
+cli5.addProduto(produto1)
+cli6.addProduto(produto3)
+cli7.addProduto(produto3)
+cli8.addProduto(produto1)
+cli9.addProduto(produto1)
+
+cli1.addServico(servico1)
+cli2.addServico(servico2)
+cli3.addServico(servico3)
+cli4.addServico(servico2)
+cli5.addServico(servico1)
+cli6.addServico(servico3)
+cli7.addServico(servico3)
+cli8.addServico(servico1)
+cli9.addServico(servico1)
 // FIM
 
 
@@ -69,6 +109,8 @@ while (execucao) {
     console.log(`10 - Listar todos os Serviços`);
     console.log(`11 - Atualizar serviços`);
     console.log(`12 - Excluir serviços`);
+    console.log(`13 - Listagem por gênero`);
+    console.log(`14 - Cadastrar consumo de produtos ou serviço para o cliente`);
     
     console.log(`0 - Sair`);
 
@@ -123,6 +165,14 @@ while (execucao) {
         case 12:
             let excluirSer = new ExcluirServico(empresa.getServicos)
             excluirSer.Exclui()
+            break
+        case 13:
+            let listagemGem = new ListagemGenero(empresa.getClientes)
+            listagemGem.listar()
+            break
+        case 14:
+            let cadastroConsumoCliente = new CadastroConsumoCliente(empresa.getClientes,empresa)
+            cadastroConsumoCliente.cadastrar()
             break
         case 0:
             execucao = false

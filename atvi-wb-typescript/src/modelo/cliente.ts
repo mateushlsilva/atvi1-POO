@@ -52,4 +52,11 @@ export default class Cliente {
         this.telefones.push(telefone);
     }
 
+    public addProduto(produto: Produto){
+        this.produtosConsumidos.push(produto)
+    }
+
+    public addServico(servico: Servico){
+        this.servicosConsumidos.push(servico)
+    }
 }
