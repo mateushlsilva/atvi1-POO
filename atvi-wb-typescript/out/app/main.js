@@ -75,6 +75,7 @@ cli6.addProduto(produto3);
 cli7.addProduto(produto3);
 cli8.addProduto(produto1);
 cli9.addProduto(produto1);
+cli9.addProduto(produto2);
 cli1.addServico(servico1);
 cli2.addServico(servico2);
 cli3.addServico(servico3);

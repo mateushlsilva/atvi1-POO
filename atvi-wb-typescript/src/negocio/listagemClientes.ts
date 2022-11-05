@@ -17,12 +17,14 @@ export default class ListagemClientes extends Listagem {
             cliente.getRgs.forEach(rg => {
                 console.log(`RG: ${rg.getValor}`);
             })
+            console.log(`Produtos consumidos: [ `)
             cliente.getProdutosConsumidos.forEach(prod => {
-                console.log(`Produtos consumidos: ` + prod.nome)
-            });
+                console.log('      '+ prod.nome)
+            });console.log(']');
+            console.log(`Serviços consumidos: [ `)
             cliente.getServicosConsumidos.forEach(ser => {
-                console.log(`Serviços consumidos: ` + ser.nome);
-            });
+                console.log('      '+ ser.nome);
+            });console.log(']');
             console.log(`--------------------------------------`);
         });
         console.log(`\n`);
