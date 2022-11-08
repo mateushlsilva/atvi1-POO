@@ -15,6 +15,7 @@ import CadastroServicos from "../negocio/CadastroServicos";
 import ExcluirCliente from "../negocio/deletarCliente";
 import ExcluirProduto from "../negocio/deletarProduto";
 import ExcluirServico from "../negocio/deletarServico";
+import ListagemConsumoMais from "../negocio/listagem/ListagemConsumoMais";
 import ListagemGenero from "../negocio/listagem/ListagemGenero";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/ListagemProdutos";
@@ -35,6 +36,8 @@ let cli6 = new Cliente('Lucimara', 'Lucimara', new CPF('39454475554',new Date(12
 let cli7 = new Cliente('Ayanokoji', 'Ayanokoji', new CPF('14454877456',new Date(12,12,1221)), 'Masculino')
 let cli8 = new Cliente('Kei', 'Kei Karuizawa', new CPF('52452245451',new Date(12,12,1221)), 'Feminino')
 let cli9 = new Cliente('Ichigo', 'Ichigo', new CPF('11454445458',new Date(12,12,1221)), 'Masculino')
+let cli10 = new Cliente('Naruto', 'Naruto', new CPF('31454745895',new Date(12,12,1221)), 'Masculino')
+let cli11 = new Cliente('Mario', 'Mario', new CPF('56554745895',new Date(12,12,1221)), 'Masculino')
 cli1.addRg(new RG('58951348',new Date(20,12,2000)))
 cli2.addRg(new RG('89522146',new Date(20,12,2000)))
 cli3.addRg(new RG('77572727',new Date(20,12,2000)))
@@ -44,6 +47,8 @@ cli6.addRg(new RG('39845464',new Date(20,12,2000)))
 cli7.addRg(new RG('87214654',new Date(20,12,2000)))
 cli8.addRg(new RG('44874668',new Date(20,12,2000)))
 cli9.addRg(new RG('52115576',new Date(20,12,2000)))
+cli10.addRg(new RG('47115597',new Date(20,12,2000)))
+cli11.addRg(new RG('88715597',new Date(20,12,2000)))
 
 empresa.getClientes.push(cli1)
 empresa.getClientes.push(cli2)
@@ -54,6 +59,8 @@ empresa.getClientes.push(cli6)
 empresa.getClientes.push(cli7)
 empresa.getClientes.push(cli8)
 empresa.getClientes.push(cli9)
+empresa.getClientes.push(cli10)
+empresa.getClientes.push(cli11)
 
 let servico1 = new Servico("Corte")
 let servico2 = new Servico("Remoção de rugas")
@@ -81,6 +88,7 @@ cli7.addProduto(produto3)
 cli8.addProduto(produto1)
 cli9.addProduto(produto1)
 cli9.addProduto(produto2)
+cli11.addProduto(produto2)
 
 cli1.addServico(servico1)
 cli2.addServico(servico2)
@@ -91,6 +99,7 @@ cli6.addServico(servico3)
 cli7.addServico(servico3)
 cli8.addServico(servico1)
 cli9.addServico(servico1)
+cli11.addServico(servico1)
 // FIM
 
 
@@ -112,6 +121,7 @@ while (execucao) {
     console.log(`12 - Excluir serviços`);
     console.log(`13 - Listagem por gênero`);
     console.log(`14 - Cadastrar consumo de produtos ou serviço para o cliente`);
+    console.log(`15 - Listagem do consumo dos 10 produtos ou serviço mais consumidos`);
     
     console.log(`0 - Sair`);
 
@@ -174,6 +184,10 @@ while (execucao) {
         case 14:
             let cadastroConsumoCliente = new CadastroConsumoCliente(empresa.getClientes,empresa)
             cadastroConsumoCliente.cadastrar()
+            break
+        case 15:
+            let listagem10mais = new ListagemConsumoMais(empresa.getClientes)
+            listagem10mais.listar()
             break
         case 0:
             execucao = false
