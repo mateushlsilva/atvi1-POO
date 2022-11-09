@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import Entrada from "../../io/entrada";
 import Cliente from "../../modelo/cliente";
 import Listagem from "../listagem";
@@ -25,45 +26,45 @@ export default class ListagemGenero extends Listagem{
         let entrada =  new Entrada()
         let genero = entrada.receberGenero('Qual é o gênero?: ')
         if(genero[0].toUpperCase() == 'M'){
+            console.log(chalk.red(`--------------------------------------`));
             mas.forEach(cliente => {
-                console.log(`--------------------------------------`);
-                console.log(`Nome: ` + cliente.nome);
-                console.log(`Nome social: ` + cliente.nomeSocial);
-                console.log(`Gênero: ${cliente.genero}`);
-                console.log(`CPF: ` + cliente.getCpf.getValor);
+                console.log(chalk.blueBright(`Nome: ` )+ cliente.nome);
+                console.log(chalk.blueBright(`Nome social: `) + cliente.nomeSocial);
+                console.log(chalk.blueBright(`Gênero: `) + cliente.genero);
+                console.log(chalk.blueBright(`CPF: ` ) + cliente.getCpf.getValor);
                 cliente.getRgs.forEach(rg => {
-                    console.log(`RG: ${rg.getValor}`);
+                    console.log(chalk.blueBright(`RG: `) + rg.getValor);
                 })
-                console.log(`Produtos consumidos: [ `)
+                console.log(chalk.blueBright(`Produtos consumidos: [ `))
                 cliente.getProdutosConsumidos.forEach(prod => {
                     console.log('      '+ prod.nome)
-                });console.log(']');
-                console.log(`Serviços consumidos: [ `)
+                });console.log(chalk.blueBright(']'));
+                console.log(chalk.blueBright(`Serviços consumidos: [ `))
                 cliente.getServicosConsumidos.forEach(ser => {
                     console.log('      '+ ser.nome);
-                });console.log(']');
-                console.log(`--------------------------------------`);
+                });console.log(chalk.blueBright(']'));
+                console.log(chalk.red(`--------------------------------------`));
             })
         }else{
+            console.log(chalk.red(`--------------------------------------`));
             fem.forEach(cliente => {
-                console.log(`--------------------------------------`);
-                console.log(`Nome: ` + cliente.nome);
-                console.log(`Nome social: ` + cliente.nomeSocial);
-                console.log(`Gênero: ${cliente.genero}`);
-                console.log(`CPF: ` + cliente.getCpf.getValor);
+                console.log(chalk.blueBright(`Nome: `) + cliente.nome);
+                console.log(chalk.blueBright(`Nome social: ` )+ cliente.nomeSocial);
+                console.log(chalk.blueBright(`Gênero: `)+ cliente.genero);
+                console.log(chalk.blueBright(`CPF: ` ) + cliente.getCpf.getValor);
                 cliente.getRgs.forEach(rg => {
-                    console.log(`RG: ${rg.getValor}`);
+                    console.log(chalk.blueBright(`RG: `) + rg.getValor);
                 
                 })
-                console.log(`Produtos consumidos: [ `)
+                console.log(chalk.blueBright(`Produtos consumidos: [ `))
                 cliente.getProdutosConsumidos.forEach(prod => {
                     console.log('      '+ prod.nome)
-                });console.log(']');
-                console.log(`Serviços consumidos: [ `)
+                });console.log(chalk.blueBright(']'));
+                console.log(chalk.blueBright(`Serviços consumidos: [ `))
                 cliente.getServicosConsumidos.forEach(ser => {
                     console.log('      '+ ser.nome);
-                });console.log(']');
-                console.log(`--------------------------------------`);
+                });console.log(chalk.blueBright(']'));
+                console.log(chalk.red(`--------------------------------------`));
             })
         }
     }

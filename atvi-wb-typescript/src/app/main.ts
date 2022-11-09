@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
@@ -16,6 +17,7 @@ import ExcluirCliente from "../negocio/deletarCliente";
 import ExcluirProduto from "../negocio/deletarProduto";
 import ExcluirServico from "../negocio/deletarServico";
 import ListagemConsumoMais from "../negocio/listagem/ListagemConsumoMais";
+import ListagemConsumoMenos from "../negocio/listagem/ListagemConsumoMenos";
 import ListagemGenero from "../negocio/listagem/ListagemGenero";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/ListagemProdutos";
@@ -106,24 +108,24 @@ cli11.addServico(servico1)
 let execucao = true
 
 while (execucao) {
-    console.log(`Opções:`);
-    console.log(`1 - Cadastrar cliente`);
-    console.log(`2 - Listar todos os clientes`);
-    console.log(`3 - Atualizar clientes`);
-    console.log(`4 - Excluir clientes`);
-    console.log(`5 - Cadastrar Produto`);
-    console.log(`6 - Listar todos os produtos`);
-    console.log(`7 - Atualizar produtos`);
-    console.log(`8 - Excluir produtos`);
-    console.log(`9 - Cadastrar Serviços`);
-    console.log(`10 - Listar todos os Serviços`);
-    console.log(`11 - Atualizar serviços`);
-    console.log(`12 - Excluir serviços`);
-    console.log(`13 - Listagem por gênero`);
-    console.log(`14 - Cadastrar consumo de produtos ou serviço para o cliente`);
-    console.log(`15 - Listagem do consumo dos 10 produtos ou serviço mais consumidos`);
-    
-    console.log(`0 - Sair`);
+    console.log(chalk.blackBright(`Opções:`));
+    console.log(chalk.blueBright(`1 - Cadastrar cliente`));
+    console.log(chalk.blueBright(`2 - Listar todos os clientes`));
+    console.log(chalk.blueBright(`3 - Atualizar clientes`));
+    console.log(chalk.blueBright(`4 - Excluir clientes`));
+    console.log(chalk.blueBright(`5 - Cadastrar Produto`));
+    console.log(chalk.blueBright(`6 - Listar todos os produtos`));
+    console.log(chalk.blueBright(`7 - Atualizar produtos`));
+    console.log(chalk.blueBright(`8 - Excluir produtos`));
+    console.log(chalk.blueBright(`9 - Cadastrar Serviços`));
+    console.log(chalk.blueBright(`10 - Listar todos os Serviços`));
+    console.log(chalk.blueBright(`11 - Atualizar serviços`));
+    console.log(chalk.blueBright(`12 - Excluir serviços`));
+    console.log(chalk.blueBright(`13 - Listagem por gênero`));
+    console.log(chalk.blueBright(`14 - Cadastrar consumo de produtos ou serviço para o cliente`));
+    console.log(chalk.blueBright(`15 - Listagem do consumo dos 10 produtos ou serviço mais consumidos`));
+    console.log(chalk.blueBright(`16 - Listagem do consumo dos 10 produtos ou serviço menos consumidos`));
+    console.log(chalk.red(`0 - Sair`));
 
     let entrada = new Entrada()
     let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
@@ -188,6 +190,10 @@ while (execucao) {
         case 15:
             let listagem10mais = new ListagemConsumoMais(empresa.getClientes)
             listagem10mais.listar()
+            break
+        case 16:
+            let listagem10menos = new ListagemConsumoMenos(empresa.getClientes)
+            listagem10menos.listar()
             break
         case 0:
             execucao = false

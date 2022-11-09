@@ -4,7 +4,7 @@ import Cliente from "../../modelo/cliente";
 import Listagem from "../listagem";
 
 
-export default class ListagemConsumoMais extends Listagem{
+export default class ListagemConsumoMenos extends Listagem{
     private clientes: Array<Cliente>
     constructor(clientes: Array<Cliente>) {
         super()
@@ -30,12 +30,12 @@ export default class ListagemConsumoMais extends Listagem{
         })
 
         consumoProduto.sort(function(n1,n2) {
-            return n2.quantidadeProdutos - n1.quantidadeProdutos
+            return n1.quantidadeProdutos - n2.quantidadeProdutos
         })
         consumoProduto = consumoProduto.slice(0,10)
 
         consumoServico.sort(function(n1,n2) {
-            return n2.quantidadeServicos - n1.quantidadeServicos
+            return n1.quantidadeServicos - n2.quantidadeServicos
         })
         consumoServico = consumoServico.slice(0,10)
         
@@ -49,7 +49,7 @@ export default class ListagemConsumoMais extends Listagem{
             let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
             switch (opcao) {
                 case 1:
-                    console.log(chalk.blue("Listagem dos 10 Clientes que MAIS consumiram produtos em quantidade."));
+                    console.log(chalk.blue("Listagem dos 10 Clientes que Menos consumiram produtos em quantidade."));
 
                     console.log(chalk.red(`\n---------------------------------------------------------------\n`));
 
@@ -63,7 +63,7 @@ export default class ListagemConsumoMais extends Listagem{
                     exec = false
                     break;
                 case 2:
-                    console.log(chalk.blue("Listagem dos 10 Clientes que MAIS consumiram serviços em quantidade."));
+                    console.log(chalk.blue("Listagem dos 10 Clientes que Menos consumiram serviços em quantidade."));
                     console.log(chalk.red(`\n---------------------------------------------------------------\n`));
                     consumoServico.forEach( cliente => {
                         console.log(chalk.blueBright('Nome do Cliente: ') + cliente.nome  );

@@ -4,6 +4,7 @@ import RG from "./rg"
 import Servico from "./servico"
 import Telefone from "./telefone"
 
+
 export default class Cliente {
     public nome: string
     public nomeSocial: string

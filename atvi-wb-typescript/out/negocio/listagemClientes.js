@@ -18,6 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var chalk_1 = __importDefault(require("chalk"));
 var listagem_1 = __importDefault(require("./listagem"));
 var ListagemClientes = /** @class */ (function (_super) {
     __extends(ListagemClientes, _super);
@@ -27,26 +28,27 @@ var ListagemClientes = /** @class */ (function (_super) {
         return _this;
     }
     ListagemClientes.prototype.listar = function () {
-        console.log("\nLista de todos os clientes:");
+        console.log(chalk_1.default.blueBright("\nLista de todos os clientes:"));
+        console.log(chalk_1.default.red("----------------------------------------------------------"));
         this.clientes.forEach(function (cliente) {
-            console.log("Nome: " + cliente.nome);
-            console.log("Nome social: " + cliente.nomeSocial);
-            console.log("G\u00EAnero: ".concat(cliente.genero));
-            console.log("CPF: " + cliente.getCpf.getValor);
+            console.log(chalk_1.default.blueBright("Nome: ") + cliente.nome);
+            console.log(chalk_1.default.blueBright("Nome social: ") + cliente.nomeSocial);
+            console.log(chalk_1.default.blueBright('Gênero: ') + cliente.genero);
+            console.log(chalk_1.default.blueBright("CPF: ") + cliente.getCpf.getValor);
             cliente.getRgs.forEach(function (rg) {
-                console.log("RG: ".concat(rg.getValor));
+                console.log(chalk_1.default.blueBright("RG: ") + rg.getValor);
             });
-            console.log("Produtos consumidos: [ ");
+            console.log(chalk_1.default.blueBright("Produtos consumidos: [ "));
             cliente.getProdutosConsumidos.forEach(function (prod) {
                 console.log('      ' + prod.nome);
             });
-            console.log(']');
-            console.log("Servi\u00E7os consumidos: [ ");
+            console.log(chalk_1.default.blueBright(']'));
+            console.log(chalk_1.default.blueBright("Servi\u00E7os consumidos: [ "));
             cliente.getServicosConsumidos.forEach(function (ser) {
                 console.log('      ' + ser.nome);
             });
-            console.log(']');
-            console.log("--------------------------------------");
+            console.log(chalk_1.default.blueBright(']'));
+            console.log(chalk_1.default.red("----------------------------------------------------------"));
         });
         console.log("\n");
     };
