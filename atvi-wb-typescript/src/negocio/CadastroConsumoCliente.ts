@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import Empresa from "../modelo/empresa";
@@ -24,10 +25,10 @@ export default class CadastroConsumoCliente extends Cadastro{
                 if(cliente.getCpf.getValor == proc){
                     while(exe){
                         console.log("------------------------------------------------");
-                        console.log(`Opeção de consumo.`);
-                        console.log(`1 - Produto`);
-                        console.log(`2 - Serviço`);
-                        console.log(`0 - Sair`);           
+                        console.log(chalk.greenBright(`Opeção de consumo.`));
+                        console.log(chalk.blueBright(`1 - Produto`));
+                        console.log(chalk.blueBright(`2 - Serviço`));
+                        console.log(chalk.redBright(`0 - Sair`));           
                         let op = this.entrada.receberNumero('Insira a Opção:  ')
                         let cont = 1
                         switch(op){
@@ -36,9 +37,9 @@ export default class CadastroConsumoCliente extends Cadastro{
                                 this.empresa.getProdutos.forEach(prod => {
                                     if(prod.nome == produtoNome){
                                         cliente.addProduto(prod)
-                                        console.log(`\nInserido com Sucesso`);
+                                        console.log(chalk.greenBright(`\nInserido com Sucesso`));
                                     }else if(cont == this.empresa.getProdutos.length){
-                                        console.log(`Produto invalido!`);
+                                        console.log(chalk.redBright(`Produto invalido!`));
                                     }else{
                                         cont++
                                     }
@@ -49,9 +50,9 @@ export default class CadastroConsumoCliente extends Cadastro{
                                 this.empresa.getServicos.forEach(ser => {
                                     if(ser.nome == servicoNome){
                                         cliente.addServico(ser)
-                                        console.log(`\nInserido com Sucesso`);
+                                        console.log(chalk.blueBright(`\nInserido com Sucesso`));
                                     }else if(cont == this.empresa.getServicos.length){
-                                        console.log(`Serviço invalido!`);
+                                        console.log(chalk.redBright(`Serviço invalido!`));
                                     }else{
                                         cont++
                                     }
@@ -60,15 +61,15 @@ export default class CadastroConsumoCliente extends Cadastro{
                             case 0:
                                 exe = false
                                 execucao = false
-                                console.log(`Obrigado!`)
+                                console.log(chalk.greenBright(`Obrigado!`))
                                 break;
                             default:
-                                console.log(`Digite Uma Opção Válida!`);
+                                console.log(chalk.redBright(`Digite Uma Opção Válida!`));
                                 exe = true 
                         }
                     }
                 }else if(c == this.clientes.length){
-                    console.log('CPF invalido!');
+                    console.log(chalk.redBright('CPF invalido!'));
                     console.log('\n')
                     execucao = false
                 }else{

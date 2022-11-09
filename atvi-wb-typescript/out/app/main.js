@@ -27,7 +27,7 @@ var ListagemGenero_1 = __importDefault(require("../negocio/listagem/ListagemGene
 var listagemClientes_1 = __importDefault(require("../negocio/listagemClientes"));
 var ListagemProdutos_1 = __importDefault(require("../negocio/ListagemProdutos"));
 var ListagemServicos_1 = __importDefault(require("../negocio/ListagemServicos"));
-console.log("Bem-vindo ao cadastro de clientes do Grupo World Beauty");
+console.log(chalk_1.default.greenBright("Bem-vindo ao cadastro de clientes do Grupo World Beauty"));
 var empresa = new empresa_1.default();
 // Clientes cadastrados antes do programa
 var cli1 = new cliente_1.default('Gustavo', 'Gusta gol', new cpf_1.default('45454545454', new Date(12, 12, 1221)), 'Masculino');

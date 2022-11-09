@@ -18,6 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var chalk_1 = __importDefault(require("chalk"));
 var entrada_1 = __importDefault(require("../io/entrada"));
 var cadastro_1 = __importDefault(require("./cadastro"));
 var CadastroConsumoCliente = /** @class */ (function (_super) {
@@ -40,10 +41,10 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                 if (cliente.getCpf.getValor == proc) {
                     var _loop_1 = function () {
                         console.log("------------------------------------------------");
-                        console.log("Ope\u00E7\u00E3o de consumo.");
-                        console.log("1 - Produto");
-                        console.log("2 - Servi\u00E7o");
-                        console.log("0 - Sair");
+                        console.log(chalk_1.default.greenBright("Ope\u00E7\u00E3o de consumo."));
+                        console.log(chalk_1.default.blueBright("1 - Produto"));
+                        console.log(chalk_1.default.blueBright("2 - Servi\u00E7o"));
+                        console.log(chalk_1.default.redBright("0 - Sair"));
                         var op = _this.entrada.receberNumero('Insira a Opção:  ');
                         var cont = 1;
                         switch (op) {
@@ -52,10 +53,10 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                                 _this.empresa.getProdutos.forEach(function (prod) {
                                     if (prod.nome == produtoNome_1) {
                                         cliente.addProduto(prod);
-                                        console.log("\nInserido com Sucesso");
+                                        console.log(chalk_1.default.greenBright("\nInserido com Sucesso"));
                                     }
                                     else if (cont == _this.empresa.getProdutos.length) {
-                                        console.log("Produto invalido!");
+                                        console.log(chalk_1.default.redBright("Produto invalido!"));
                                     }
                                     else {
                                         cont++;
@@ -67,10 +68,10 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                                 _this.empresa.getServicos.forEach(function (ser) {
                                     if (ser.nome == servicoNome_1) {
                                         cliente.addServico(ser);
-                                        console.log("\nInserido com Sucesso");
+                                        console.log(chalk_1.default.blueBright("\nInserido com Sucesso"));
                                     }
                                     else if (cont == _this.empresa.getServicos.length) {
-                                        console.log("Servi\u00E7o invalido!");
+                                        console.log(chalk_1.default.redBright("Servi\u00E7o invalido!"));
                                     }
                                     else {
                                         cont++;
@@ -80,10 +81,10 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                             case 0:
                                 exe = false;
                                 execucao = false;
-                                console.log("Obrigado!");
+                                console.log(chalk_1.default.greenBright("Obrigado!"));
                                 break;
                             default:
-                                console.log("Digite Uma Op\u00E7\u00E3o V\u00E1lida!");
+                                console.log(chalk_1.default.redBright("Digite Uma Op\u00E7\u00E3o V\u00E1lida!"));
                                 exe = true;
                         }
                     };
@@ -92,7 +93,7 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                     }
                 }
                 else if (c == _this.clientes.length) {
-                    console.log('CPF invalido!');
+                    console.log(chalk_1.default.redBright('CPF invalido!'));
                     console.log('\n');
                     execucao = false;
                 }

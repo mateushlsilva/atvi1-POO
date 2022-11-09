@@ -24,7 +24,7 @@ import ListagemProdutos from "../negocio/ListagemProdutos";
 import ListagemServicos from "../negocio/ListagemServicos";
 
 
-console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
+console.log(chalk.greenBright(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`))
 let empresa = new Empresa()
 
 
