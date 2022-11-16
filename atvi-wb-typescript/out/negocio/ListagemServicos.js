@@ -31,6 +31,7 @@ var ListagemServicos = /** @class */ (function (_super) {
         this.servicos.forEach(function (servicos) {
             console.log("--------------------------------------");
             console.log("Nome: " + servicos.nome);
+            console.log('Preço: ' + servicos.preco);
         });
         console.log("\n");
     };

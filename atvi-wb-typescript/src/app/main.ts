@@ -16,9 +16,11 @@ import CadastroServicos from "../negocio/CadastroServicos";
 import ExcluirCliente from "../negocio/deletarCliente";
 import ExcluirProduto from "../negocio/deletarProduto";
 import ExcluirServico from "../negocio/deletarServico";
+import ListagemComusumoGen from "../negocio/listagem/ListagemComusumoGen";
 import ListagemConsumoMais from "../negocio/listagem/ListagemConsumoMais";
 import ListagemConsumoMenos from "../negocio/listagem/ListagemConsumoMenos";
 import ListagemGenero from "../negocio/listagem/ListagemGenero";
+import ListagemProdutosOuServicosMais from "../negocio/listagem/ListagemProdutosOuServicosMais";
 import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/ListagemProdutos";
 import ListagemServicos from "../negocio/ListagemServicos";
@@ -64,17 +66,17 @@ empresa.getClientes.push(cli9)
 empresa.getClientes.push(cli10)
 empresa.getClientes.push(cli11)
 
-let servico1 = new Servico("Corte")
-let servico2 = new Servico("Remoção de rugas")
-let servico3 = new Servico("Remoção  de manchas na pele")
+let servico1 = new Servico("Corte", 24)
+let servico2 = new Servico("Remoção de rugas", 12)
+let servico3 = new Servico("Remoção  de manchas na pele", 34)
 
 empresa.getServicos.push(servico1)
 empresa.getServicos.push(servico2)
 empresa.getServicos.push(servico3)
 
-let produto1 = new Produto("Pomada")
-let produto2 = new Produto("Condicionador")
-let produto3 = new Produto("Creme")
+let produto1 = new Produto("Pomada",12)
+let produto2 = new Produto("Condicionador",20)
+let produto3 = new Produto("Creme", 15)
 
 empresa.getProdutos.push(produto1)
 empresa.getProdutos.push(produto2)
@@ -125,6 +127,8 @@ while (execucao) {
     console.log(chalk.blueBright(`14 - Cadastrar consumo de produtos ou serviço para o cliente`));
     console.log(chalk.blueBright(`15 - Listagem do consumo dos 10 produtos ou serviço mais consumidos`));
     console.log(chalk.blueBright(`16 - Listagem do consumo dos 10 produtos ou serviço menos consumidos`));
+    console.log(chalk.blueBright(`17 - Listagem do produto ou serviço mais consumido`));
+    console.log(chalk.blueBright(`18 - Listagem do produto ou serviço mais consumido por gênero`));
     console.log(chalk.red(`0 - Sair`));
 
     let entrada = new Entrada()
@@ -194,6 +198,14 @@ while (execucao) {
         case 16:
             let listagem10menos = new ListagemConsumoMenos(empresa.getClientes)
             listagem10menos.listar()
+            break
+        case 17:
+            let listagemProdutosOuServicosMais = new ListagemProdutosOuServicosMais(empresa.getClientes)
+            listagemProdutosOuServicosMais.listar()
+            break
+        case 18:
+            let listagemConsumoGem = new ListagemComusumoGen(empresa.getClientes)
+            listagemConsumoGem.listar()
             break
         case 0:
             execucao = false

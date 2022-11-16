@@ -32,7 +32,8 @@ var CadastroProdutos = /** @class */ (function (_super) {
     CadastroProdutos.prototype.cadastrar = function () {
         console.log("\nIn\u00EDcio do cadastro do produto");
         var nome = this.entrada.receberTexto("Por favor informe o nome do produto: ");
-        var produto = new produto_1.default(nome);
+        var preco = this.entrada.receberNumero("Por favor informe o pre\u00E7o do produto: ");
+        var produto = new produto_1.default(nome, preco);
         //produto.nome = nome
         this.nomes.push(produto);
         console.log("\nCadastro conclu\u00EDdo :)\n");

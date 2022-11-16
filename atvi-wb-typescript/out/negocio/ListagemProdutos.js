@@ -31,8 +31,14 @@ var ListagemProdutos = /** @class */ (function (_super) {
         this.produtos.forEach(function (produtos) {
             console.log("--------------------------------------");
             console.log("Nome: " + produtos.nome);
+            console.log('Preço: ' + produtos.preco);
         });
         console.log("\n");
+    };
+    ListagemProdutos.prototype.quantidadeProduto = function () {
+        var cont = this.produtos.length;
+        console.log(cont);
+        return cont;
     };
     return ListagemProdutos;
 }(listagem_1.default));

@@ -32,7 +32,8 @@ var CadastroServicos = /** @class */ (function (_super) {
     CadastroServicos.prototype.cadastrar = function () {
         console.log("\nIn\u00EDcio do cadastro do servi\u00E7o");
         var nome = this.entrada.receberTexto("Por favor informe o nome do servi\u00E7o: ");
-        var servico = new servico_1.default(nome);
+        var preco = this.entrada.receberNumero("Por favor informe o preco do servi\u00E7o: ");
+        var servico = new servico_1.default(nome, preco);
         //servico.nome = nome
         this.nomes.push(servico);
         console.log("\nCadastro conclu\u00EDdo :)\n");

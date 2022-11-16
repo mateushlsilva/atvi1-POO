@@ -21,9 +21,11 @@ var CadastroServicos_1 = __importDefault(require("../negocio/CadastroServicos"))
 var deletarCliente_1 = __importDefault(require("../negocio/deletarCliente"));
 var deletarProduto_1 = __importDefault(require("../negocio/deletarProduto"));
 var deletarServico_1 = __importDefault(require("../negocio/deletarServico"));
+var ListagemComusumoGen_1 = __importDefault(require("../negocio/listagem/ListagemComusumoGen"));
 var ListagemConsumoMais_1 = __importDefault(require("../negocio/listagem/ListagemConsumoMais"));
 var ListagemConsumoMenos_1 = __importDefault(require("../negocio/listagem/ListagemConsumoMenos"));
 var ListagemGenero_1 = __importDefault(require("../negocio/listagem/ListagemGenero"));
+var ListagemProdutosOuServicosMais_1 = __importDefault(require("../negocio/listagem/ListagemProdutosOuServicosMais"));
 var listagemClientes_1 = __importDefault(require("../negocio/listagemClientes"));
 var ListagemProdutos_1 = __importDefault(require("../negocio/ListagemProdutos"));
 var ListagemServicos_1 = __importDefault(require("../negocio/ListagemServicos"));
@@ -63,15 +65,15 @@ empresa.getClientes.push(cli8);
 empresa.getClientes.push(cli9);
 empresa.getClientes.push(cli10);
 empresa.getClientes.push(cli11);
-var servico1 = new servico_1.default("Corte");
-var servico2 = new servico_1.default("Remoção de rugas");
-var servico3 = new servico_1.default("Remoção  de manchas na pele");
+var servico1 = new servico_1.default("Corte", 24);
+var servico2 = new servico_1.default("Remoção de rugas", 12);
+var servico3 = new servico_1.default("Remoção  de manchas na pele", 34);
 empresa.getServicos.push(servico1);
 empresa.getServicos.push(servico2);
 empresa.getServicos.push(servico3);
-var produto1 = new produto_1.default("Pomada");
-var produto2 = new produto_1.default("Condicionador");
-var produto3 = new produto_1.default("Creme");
+var produto1 = new produto_1.default("Pomada", 12);
+var produto2 = new produto_1.default("Condicionador", 20);
+var produto3 = new produto_1.default("Creme", 15);
 empresa.getProdutos.push(produto1);
 empresa.getProdutos.push(produto2);
 empresa.getProdutos.push(produto3);
@@ -116,6 +118,8 @@ while (execucao) {
     console.log(chalk_1.default.blueBright("14 - Cadastrar consumo de produtos ou servi\u00E7o para o cliente"));
     console.log(chalk_1.default.blueBright("15 - Listagem do consumo dos 10 produtos ou servi\u00E7o mais consumidos"));
     console.log(chalk_1.default.blueBright("16 - Listagem do consumo dos 10 produtos ou servi\u00E7o menos consumidos"));
+    console.log(chalk_1.default.blueBright("17 - Listagem do produto ou servi\u00E7o mais consumido"));
+    console.log(chalk_1.default.blueBright("18 - Listagem do produto ou servi\u00E7o mais consumido por g\u00EAnero"));
     console.log(chalk_1.default.red("0 - Sair"));
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -183,6 +187,14 @@ while (execucao) {
         case 16:
             var listagem10menos = new ListagemConsumoMenos_1.default(empresa.getClientes);
             listagem10menos.listar();
+            break;
+        case 17:
+            var listagemProdutosOuServicosMais = new ListagemProdutosOuServicosMais_1.default(empresa.getClientes);
+            listagemProdutosOuServicosMais.listar();
+            break;
+        case 18:
+            var listagemConsumoGem = new ListagemComusumoGen_1.default(empresa.getClientes);
+            listagemConsumoGem.listar();
             break;
         case 0:
             execucao = false;
