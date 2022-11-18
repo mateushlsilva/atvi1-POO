@@ -14,20 +14,48 @@ export default class ListagemProdutosOuServicosMais extends Listagem{
     public async listar(): Promise<void> {
         let consumoProduto:any = []
         let consumoServico:any = []
+        let consumoP:any = []
 
 
         this.clientes.forEach(cliente => {
-            cliente.getProdutosConsumidos.forEach(produto => {
-                let cont = consumoProduto[produto.nome] = ( consumoProduto[produto.nome] || 0 ) + 1
+            let lista = cliente.getProdutosConsumidos;
+            for(let n = 0; n <lista.length;n++){
                 
-                consumoProduto.push({
-                    nome: produto.nome,
-                    quantidadeProdutos: cont
-                })
-                // let indice = consumoProduto.indexOf(produto)
-                // consumoProduto.splice(indice, 1)
-                    
-            })
+                let count = 0;
+                let listaProduto = lista.filter(item =>{ return  item.nome == lista[n].nome})
+                count = listaProduto.length;
+                console.log(consumoProduto.indexOf(lista[n].nome));
+                
+                if(consumoProduto.indexOf(lista[n].nome) == -1){
+                    consumoProduto.push({
+                        nome: listaProduto[n].nome,
+                        quantidadeProdutos: count
+                    })
+                }else{
+                    consumoProduto.quantidadeProdutos = consumoProduto.quantidadeProdutos + count
+                }
+                lista = lista.filter(item =>{ return item.nome != listaProduto[n].nome })
+                n = 0;
+
+
+            }
+            // cliente.getProdutosConsumidos.forEach(produto => {
+            //     let cont = 0
+            //     var listaProduto = cliente.getProdutosConsumidos.filter(item =>{ item.nome == produto.nome})
+                
+                
+            //     // let indice = consumoProduto.indexOf(produto)
+            //     // consumoProduto.splice(indice, 1)
+            //     while(consumoProduto[produto.nome] != ){
+            //         cont = consumoProduto[produto.nome] = ( consumoProduto[produto.nome] || 0 ) + 1
+            //     }
+            //         consumoProduto.push({
+            //             nome: produto.nome,
+            //             quantidadeProdutos: cont
+            //         })
+
+            // })
+            
         })
         
         this.clientes.forEach(cliente => {
@@ -46,8 +74,12 @@ export default class ListagemProdutosOuServicosMais extends Listagem{
             return n2.quantidadeProdutos - n1.quantidadeProdutos
         })
         
-        consumoProduto = consumoProduto.slice(0, 5)
-        console.log(consumoProduto);
+        // consumoProduto.forEach(prod => {
+        //     let indice = consumoProduto.indexOf(prod)
+        //     consumoProduto.splice(indice, 1)
+        // })
+
+        //consumoProduto = consumoProduto.slice(0, 5)
 
         consumoServico.sort(function(n1,n2) {
             return n2.quantidadeServicos - n1.quantidadeServicos
@@ -58,7 +90,7 @@ export default class ListagemProdutosOuServicosMais extends Listagem{
         while (exec) {
             let entrada = new Entrada()
             console.log("------------------------------------------------");
-            console.log(`Opeção de Listagem.`);
+            console.log(`Opção de Listagem.`);
             console.log(`1 - Produto`);
             console.log(`2 - Serviço`); 
             let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
@@ -70,7 +102,7 @@ export default class ListagemProdutosOuServicosMais extends Listagem{
 
                     consumoProduto.forEach( prod => {
                         console.log(chalk.blueBright('Nome do Produto: ') + prod.nome );
-                        console.log(chalk.blueBright('Quantidade de Produtos Consumidos pelo Cliente: ') + prod.quantidadeProdutos );
+                        console.log(chalk.blueBright('Quantidade de Produtos Consumidos pelos Clientes: ') + prod.quantidadeProdutos );
 
                         console.log(chalk.red(`\n---------------------------------------------------------------\n`));
                     })
@@ -81,7 +113,7 @@ export default class ListagemProdutosOuServicosMais extends Listagem{
                     console.log(chalk.red(`\n---------------------------------------------------------------\n`));
                     consumoServico.forEach( serv => {
                         console.log(chalk.blueBright('Nome do Serviço: ') + serv.nome  );
-                        console.log(chalk.blueBright('Quantidade de Serviços Consumidos pelo Cliente: ') + serv.quantidadeServicos );
+                        console.log(chalk.blueBright('Quantidade de Serviços Consumidos pelos Clientes: ') + serv.quantidadeServicos );
         
                         console.log(chalk.red(`\n---------------------------------------------------------------\n`));
                     })

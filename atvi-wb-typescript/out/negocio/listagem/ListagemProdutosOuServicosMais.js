@@ -66,20 +66,49 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
     }
     ListagemProdutosOuServicosMais.prototype.listar = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var consumoProduto, consumoServico, exec, entrada, opcao;
+            var consumoProduto, consumoServico, consumoP, exec, entrada, opcao;
             return __generator(this, function (_a) {
                 consumoProduto = [];
                 consumoServico = [];
+                consumoP = [];
                 this.clientes.forEach(function (cliente) {
-                    cliente.getProdutosConsumidos.forEach(function (produto) {
-                        var cont = consumoProduto[produto.nome] = (consumoProduto[produto.nome] || 0) + 1;
-                        consumoProduto.push({
-                            nome: produto.nome,
-                            quantidadeProdutos: cont
-                        });
-                        // let indice = consumoProduto.indexOf(produto)
-                        // consumoProduto.splice(indice, 1)
-                    });
+                    var lista = cliente.getProdutosConsumidos;
+                    var _loop_1 = function (n) {
+                        var count = 0;
+                        var listaProduto = lista.filter(function (item) { return item.nome == lista[n].nome; });
+                        count = listaProduto.length;
+                        console.log(consumoProduto.nome.indexOf(lista[n].nome));
+                        if (consumoProduto.indexOf(lista[n].nome) == -1) {
+                            consumoProduto.push({
+                                nome: listaProduto[n].nome,
+                                quantidadeProdutos: count
+                            });
+                        }
+                        else {
+                            consumoProduto.quantidadeProdutos = consumoProduto.quantidadeProdutos + count;
+                        }
+                        lista = lista.filter(function (item) { return item.nome != listaProduto[n].nome; });
+                        n = 0;
+                        out_n_1 = n;
+                    };
+                    var out_n_1;
+                    for (var n = 0; n < lista.length; n++) {
+                        _loop_1(n);
+                        n = out_n_1;
+                    }
+                    // cliente.getProdutosConsumidos.forEach(produto => {
+                    //     let cont = 0
+                    //     var listaProduto = cliente.getProdutosConsumidos.filter(item =>{ item.nome == produto.nome})
+                    //     // let indice = consumoProduto.indexOf(produto)
+                    //     // consumoProduto.splice(indice, 1)
+                    //     while(consumoProduto[produto.nome] != ){
+                    //         cont = consumoProduto[produto.nome] = ( consumoProduto[produto.nome] || 0 ) + 1
+                    //     }
+                    //         consumoProduto.push({
+                    //             nome: produto.nome,
+                    //             quantidadeProdutos: cont
+                    //         })
+                    // })
                 });
                 this.clientes.forEach(function (cliente) {
                     cliente.getServicosConsumidos.forEach(function (servicos) {
@@ -93,8 +122,11 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
                 consumoProduto.sort(function (n1, n2) {
                     return n2.quantidadeProdutos - n1.quantidadeProdutos;
                 });
-                consumoProduto = consumoProduto.slice(0, 5);
-                console.log(consumoProduto);
+                // consumoProduto.forEach(prod => {
+                //     let indice = consumoProduto.indexOf(prod)
+                //     consumoProduto.splice(indice, 1)
+                // })
+                //consumoProduto = consumoProduto.slice(0, 5)
                 consumoServico.sort(function (n1, n2) {
                     return n2.quantidadeServicos - n1.quantidadeServicos;
                 });
@@ -103,7 +135,7 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
                 while (exec) {
                     entrada = new entrada_1.default();
                     console.log("------------------------------------------------");
-                    console.log("Ope\u00E7\u00E3o de Listagem.");
+                    console.log("Op\u00E7\u00E3o de Listagem.");
                     console.log("1 - Produto");
                     console.log("2 - Servi\u00E7o");
                     opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -113,7 +145,7 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
                             console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
                             consumoProduto.forEach(function (prod) {
                                 console.log(chalk_1.default.blueBright('Nome do Produto: ') + prod.nome);
-                                console.log(chalk_1.default.blueBright('Quantidade de Produtos Consumidos pelo Cliente: ') + prod.quantidadeProdutos);
+                                console.log(chalk_1.default.blueBright('Quantidade de Produtos Consumidos pelos Clientes: ') + prod.quantidadeProdutos);
                                 console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
                             });
                             exec = false;
@@ -123,7 +155,7 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
                             console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
                             consumoServico.forEach(function (serv) {
                                 console.log(chalk_1.default.blueBright('Nome do Serviço: ') + serv.nome);
-                                console.log(chalk_1.default.blueBright('Quantidade de Serviços Consumidos pelo Cliente: ') + serv.quantidadeServicos);
+                                console.log(chalk_1.default.blueBright('Quantidade de Serviços Consumidos pelos Clientes: ') + serv.quantidadeServicos);
                                 console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
                             });
                             exec = false;
