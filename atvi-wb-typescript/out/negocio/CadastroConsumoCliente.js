@@ -53,6 +53,7 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                                 _this.empresa.getProdutos.forEach(function (prod) {
                                     if (prod.nome == produtoNome_1) {
                                         cliente.addProduto(prod);
+                                        prod.addConsumo();
                                         console.log(chalk_1.default.greenBright("\nInserido com Sucesso"));
                                     }
                                     else if (cont == _this.empresa.getProdutos.length) {
@@ -68,6 +69,7 @@ var CadastroConsumoCliente = /** @class */ (function (_super) {
                                 _this.empresa.getServicos.forEach(function (ser) {
                                     if (ser.nome == servicoNome_1) {
                                         cliente.addServico(ser);
+                                        ser.addConsumo();
                                         console.log(chalk_1.default.blueBright("\nInserido com Sucesso"));
                                     }
                                     else if (cont == _this.empresa.getServicos.length) {

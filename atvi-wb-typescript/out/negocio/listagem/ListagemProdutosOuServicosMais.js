@@ -29,7 +29,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -59,9 +59,33 @@ var entrada_1 = __importDefault(require("../../io/entrada"));
 var listagem_1 = __importDefault(require("../listagem"));
 var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
     __extends(ListagemProdutosOuServicosMais, _super);
-    function ListagemProdutosOuServicosMais(clientes) {
+    function ListagemProdutosOuServicosMais(empresa) {
         var _this = _super.call(this) || this;
-        _this.clientes = clientes;
+        _this.listarProdutos = function () {
+            var lista = _this.empresa.getProdutos.sort(function (p1, p2) {
+                if (p1.consumo > p2.consumo)
+                    return -1;
+                else
+                    return 1;
+            });
+            console.log('\nListagem geral dos produtos mais consumidos');
+            lista.forEach(function (produto, indice) {
+                console.log("".concat(indice + 1, "\u00B0 - ").concat(produto.nome, ": consumido ").concat(produto.consumo, " vezes"));
+            });
+        };
+        _this.listarServicos = function () {
+            var lista = _this.empresa.getServicos.sort(function (s1, s2) {
+                if (s1.consumo > s2.consumo)
+                    return -1;
+                else
+                    return 1;
+            });
+            console.log('\nListagem geral dos serviços mais consumidos');
+            lista.forEach(function (servico, indice) {
+                console.log("".concat(indice + 1, "\u00B0 - ").concat(servico.nome, ": consumido ").concat(servico.consumo, " vezes"));
+            });
+        };
+        _this.empresa = empresa;
         return _this;
     }
     ListagemProdutosOuServicosMais.prototype.listar = function () {
@@ -71,62 +95,9 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
                 consumoProduto = [];
                 consumoServico = [];
                 consumoP = [];
-                this.clientes.forEach(function (cliente) {
-                    var lista = cliente.getProdutosConsumidos;
-                    var _loop_1 = function (n) {
-                        var count = 0;
-                        var listaProduto = lista.filter(function (item) { return item.nome == lista[n].nome; });
-                        count = listaProduto.length;
-                        console.log(consumoProduto.nome.indexOf(lista[n].nome));
-                        if (consumoProduto.indexOf(lista[n].nome) == -1) {
-                            consumoProduto.push({
-                                nome: listaProduto[n].nome,
-                                quantidadeProdutos: count
-                            });
-                        }
-                        else {
-                            consumoProduto.quantidadeProdutos = consumoProduto.quantidadeProdutos + count;
-                        }
-                        lista = lista.filter(function (item) { return item.nome != listaProduto[n].nome; });
-                        n = 0;
-                        out_n_1 = n;
-                    };
-                    var out_n_1;
-                    for (var n = 0; n < lista.length; n++) {
-                        _loop_1(n);
-                        n = out_n_1;
-                    }
-                    // cliente.getProdutosConsumidos.forEach(produto => {
-                    //     let cont = 0
-                    //     var listaProduto = cliente.getProdutosConsumidos.filter(item =>{ item.nome == produto.nome})
-                    //     // let indice = consumoProduto.indexOf(produto)
-                    //     // consumoProduto.splice(indice, 1)
-                    //     while(consumoProduto[produto.nome] != ){
-                    //         cont = consumoProduto[produto.nome] = ( consumoProduto[produto.nome] || 0 ) + 1
-                    //     }
-                    //         consumoProduto.push({
-                    //             nome: produto.nome,
-                    //             quantidadeProdutos: cont
-                    //         })
-                    // })
-                });
-                this.clientes.forEach(function (cliente) {
-                    cliente.getServicosConsumidos.forEach(function (servicos) {
-                        var cont = consumoServico[servicos.nome] = (consumoServico[servicos.nome] || 0) + 1;
-                        consumoServico.push({
-                            nome: servicos.nome,
-                            quantidadeServicos: cont
-                        });
-                    });
-                });
                 consumoProduto.sort(function (n1, n2) {
                     return n2.quantidadeProdutos - n1.quantidadeProdutos;
                 });
-                // consumoProduto.forEach(prod => {
-                //     let indice = consumoProduto.indexOf(prod)
-                //     consumoProduto.splice(indice, 1)
-                // })
-                //consumoProduto = consumoProduto.slice(0, 5)
                 consumoServico.sort(function (n1, n2) {
                     return n2.quantidadeServicos - n1.quantidadeServicos;
                 });
@@ -143,21 +114,13 @@ var ListagemProdutosOuServicosMais = /** @class */ (function (_super) {
                         case 1:
                             console.log(chalk_1.default.greenBright("Listagem dos produtos mais consumidos em quantidade."));
                             console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
-                            consumoProduto.forEach(function (prod) {
-                                console.log(chalk_1.default.blueBright('Nome do Produto: ') + prod.nome);
-                                console.log(chalk_1.default.blueBright('Quantidade de Produtos Consumidos pelos Clientes: ') + prod.quantidadeProdutos);
-                                console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
-                            });
+                            this.listarProdutos();
                             exec = false;
                             break;
                         case 2:
                             console.log(chalk_1.default.greenBright("Listagem dos serviços mais consumidos em quantidade."));
                             console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
-                            consumoServico.forEach(function (serv) {
-                                console.log(chalk_1.default.blueBright('Nome do Serviço: ') + serv.nome);
-                                console.log(chalk_1.default.blueBright('Quantidade de Serviços Consumidos pelos Clientes: ') + serv.quantidadeServicos);
-                                console.log(chalk_1.default.red("\n---------------------------------------------------------------\n"));
-                            });
+                            this.listarServicos();
                             exec = false;
                             break;
                         default:

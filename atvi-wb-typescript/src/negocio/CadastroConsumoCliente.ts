@@ -2,6 +2,7 @@ import chalk from "chalk";
 import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import Empresa from "../modelo/empresa";
+import Produto from "../modelo/produto";
 import Cadastro from "./cadastro";
 
 
@@ -37,6 +38,7 @@ export default class CadastroConsumoCliente extends Cadastro{
                                 this.empresa.getProdutos.forEach(prod => {
                                     if(prod.nome == produtoNome){
                                         cliente.addProduto(prod)
+                                        prod.addConsumo()
                                         console.log(chalk.greenBright(`\nInserido com Sucesso`));
                                     }else if(cont == this.empresa.getProdutos.length){
                                         console.log(chalk.redBright(`Produto invalido!`));
@@ -50,6 +52,7 @@ export default class CadastroConsumoCliente extends Cadastro{
                                 this.empresa.getServicos.forEach(ser => {
                                     if(ser.nome == servicoNome){
                                         cliente.addServico(ser)
+                                        ser.addConsumo()
                                         console.log(chalk.blueBright(`\nInserido com Sucesso`));
                                     }else if(cont == this.empresa.getServicos.length){
                                         console.log(chalk.redBright(`Serviço invalido!`));

@@ -55,9 +55,22 @@ export default class Cliente {
 
     public addProduto(produto: Produto){
         this.produtosConsumidos.push(produto)
+        produto.addConsumo()
     }
 
     public addServico(servico: Servico){
         this.servicosConsumidos.push(servico)
+        servico.addConsumo()
+    }
+
+    public get getGenero(): string{
+        switch(this.genero){
+            case 'Masculino':
+                return 'M - Masculino'
+            case 'Feminino': 
+                return 'F - Feminino'
+            default:
+                return 'O - Outro'
+        }
     }
 }

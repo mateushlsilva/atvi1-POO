@@ -189,7 +189,7 @@ while (execucao) {
             listagem10menos.listar();
             break;
         case 17:
-            var listagemProdutosOuServicosMais = new ListagemProdutosOuServicosMais_1.default(empresa.getClientes);
+            var listagemProdutosOuServicosMais = new ListagemProdutosOuServicosMais_1.default(empresa);
             listagemProdutosOuServicosMais.listar();
             break;
         case 18:

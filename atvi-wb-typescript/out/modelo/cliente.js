@@ -62,10 +62,26 @@ var Cliente = /** @class */ (function () {
     };
     Cliente.prototype.addProduto = function (produto) {
         this.produtosConsumidos.push(produto);
+        produto.addConsumo();
     };
     Cliente.prototype.addServico = function (servico) {
         this.servicosConsumidos.push(servico);
+        servico.addConsumo();
     };
+    Object.defineProperty(Cliente.prototype, "getGenero", {
+        get: function () {
+            switch (this.genero) {
+                case 'Masculino':
+                    return 'M - Masculino';
+                case 'Feminino':
+                    return 'F - Feminino';
+                default:
+                    return 'O - Outro';
+            }
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Cliente;
 }());
 exports.default = Cliente;

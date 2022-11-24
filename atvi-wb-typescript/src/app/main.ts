@@ -200,7 +200,7 @@ while (execucao) {
             listagem10menos.listar()
             break
         case 17:
-            let listagemProdutosOuServicosMais = new ListagemProdutosOuServicosMais(empresa.getClientes)
+            let listagemProdutosOuServicosMais = new ListagemProdutosOuServicosMais(empresa)
             listagemProdutosOuServicosMais.listar()
             break
         case 18:
