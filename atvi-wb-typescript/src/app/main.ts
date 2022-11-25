@@ -19,6 +19,7 @@ import ExcluirServico from "../negocio/deletarServico";
 import ListagemComusumoGen from "../negocio/listagem/ListagemComusumoGen";
 import ListagemConsumoMais from "../negocio/listagem/ListagemConsumoMais";
 import ListagemConsumoMenos from "../negocio/listagem/ListagemConsumoMenos";
+import ListagemComusumoValor from "../negocio/listagem/ListagemConsumoValor";
 import ListagemGenero from "../negocio/listagem/ListagemGenero";
 import ListagemProdutosOuServicosMais from "../negocio/listagem/ListagemProdutosOuServicosMais";
 import ListagemClientes from "../negocio/listagemClientes";
@@ -125,10 +126,11 @@ while (execucao) {
     console.log(chalk.blueBright(`12 - Excluir serviços`));
     console.log(chalk.blueBright(`13 - Listagem por gênero`));
     console.log(chalk.blueBright(`14 - Cadastrar consumo de produtos ou serviço para o cliente`));
-    console.log(chalk.blueBright(`15 - Listagem do consumo dos 10 produtos ou serviço mais consumidos`));
-    console.log(chalk.blueBright(`16 - Listagem do consumo dos 10 produtos ou serviço menos consumidos`));
+    console.log(chalk.blueBright(`15 - Listagem do consumo dos produtos ou serviços mais consumidos`));
+    console.log(chalk.blueBright(`16 - Listagem do consumo dos produtos ou serviços menos consumidos`));
     console.log(chalk.blueBright(`17 - Listagem do produto ou serviço mais consumido`));
     console.log(chalk.blueBright(`18 - Listagem do produto ou serviço mais consumido por gênero`));
+    console.log(chalk.blueBright(`19 - Listagem dos clientes que mais consumiram em valor`));
     console.log(chalk.red(`0 - Sair`));
 
     let entrada = new Entrada()
@@ -204,8 +206,12 @@ while (execucao) {
             listagemProdutosOuServicosMais.listar()
             break
         case 18:
-            let listagemConsumoGem = new ListagemComusumoGen(empresa.getClientes)
+            let listagemConsumoGem = new ListagemComusumoGen(empresa)
             listagemConsumoGem.listar()
+            break
+        case 19:
+            let listagemConsumoValor = new ListagemComusumoValor(empresa)
+            listagemConsumoValor.listar()
             break
         case 0:
             execucao = false
