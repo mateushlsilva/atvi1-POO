@@ -73,4 +73,8 @@ export default class Cliente {
                 return 'O - Outro'
         }
     }
+
+    public getGeneroChar(): string{
+        return this.genero
+    }
 }
