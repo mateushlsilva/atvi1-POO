@@ -24,6 +24,7 @@ var deletarServico_1 = __importDefault(require("../negocio/deletarServico"));
 var ListagemComusumoGen_1 = __importDefault(require("../negocio/listagem/ListagemComusumoGen"));
 var ListagemConsumoMais_1 = __importDefault(require("../negocio/listagem/ListagemConsumoMais"));
 var ListagemConsumoMenos_1 = __importDefault(require("../negocio/listagem/ListagemConsumoMenos"));
+var ListagemConsumoValor_1 = __importDefault(require("../negocio/listagem/ListagemConsumoValor"));
 var ListagemGenero_1 = __importDefault(require("../negocio/listagem/ListagemGenero"));
 var ListagemProdutosOuServicosMais_1 = __importDefault(require("../negocio/listagem/ListagemProdutosOuServicosMais"));
 var listagemClientes_1 = __importDefault(require("../negocio/listagemClientes"));
@@ -116,10 +117,11 @@ while (execucao) {
     console.log(chalk_1.default.blueBright("12 - Excluir servi\u00E7os"));
     console.log(chalk_1.default.blueBright("13 - Listagem por g\u00EAnero"));
     console.log(chalk_1.default.blueBright("14 - Cadastrar consumo de produtos ou servi\u00E7o para o cliente"));
-    console.log(chalk_1.default.blueBright("15 - Listagem do consumo dos 10 produtos ou servi\u00E7o mais consumidos"));
-    console.log(chalk_1.default.blueBright("16 - Listagem do consumo dos 10 produtos ou servi\u00E7o menos consumidos"));
+    console.log(chalk_1.default.blueBright("15 - Listagem do consumo dos produtos ou servi\u00E7os mais consumidos"));
+    console.log(chalk_1.default.blueBright("16 - Listagem do consumo dos produtos ou servi\u00E7os menos consumidos"));
     console.log(chalk_1.default.blueBright("17 - Listagem do produto ou servi\u00E7o mais consumido"));
     console.log(chalk_1.default.blueBright("18 - Listagem do produto ou servi\u00E7o mais consumido por g\u00EAnero"));
+    console.log(chalk_1.default.blueBright("19 - Listagem dos clientes que mais consumiram em valor"));
     console.log(chalk_1.default.red("0 - Sair"));
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -193,8 +195,12 @@ while (execucao) {
             listagemProdutosOuServicosMais.listar();
             break;
         case 18:
-            var listagemConsumoGem = new ListagemComusumoGen_1.default(empresa.getClientes);
+            var listagemConsumoGem = new ListagemComusumoGen_1.default(empresa);
             listagemConsumoGem.listar();
+            break;
+        case 19:
+            var listagemConsumoValor = new ListagemConsumoValor_1.default(empresa);
+            listagemConsumoValor.listar();
             break;
         case 0:
             execucao = false;

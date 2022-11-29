@@ -2,6 +2,8 @@ import Servico from "../../modelo/servico";
 import Produto from "../../modelo/produto";
 import Empresa from "../../modelo/empresa";
 import Listagem from "../listagem";
+import Entrada from "../../io/entrada";
+import chalk from "chalk";
 
 export default class ListaGeneroConsumo extends Listagem {
     private empresa: Empresa 
@@ -142,37 +144,49 @@ export default class ListaGeneroConsumo extends Listagem {
     }
 
     listar(): void {
+        let exec = true
         this.registrarItens();
-        console.log('\nLista de produtos mais consumidos pelo público...')
-        console.log('\nFEMININO')
-        this.listaProduto.listaFem.forEach(produto => {
-            console.log(`- ${produto.nome}: Consumido ${produto.consumo} vezes`)
-        });
-        console.log('---------------');
-        console.log('\nMASCULINO')
-        this.listaProduto.listaMasc.forEach(produto => {
-            console.log(`- ${produto.nome}: Consumido ${produto.consumo} vezes`)
-        });
-        console.log('---------------');
-        console.log('\nNÃO-BINÁRIO')
-        this.listaProduto.listaOutros.forEach(produto => {
-            console.log(`- ${produto.nome}: Consumido ${produto.consumo} vezes`)
-        });
-        console.log('\nLista de serviços mais consumidos pelo público...');
-        console.log('\nFEMININO')
-        this.listaServico.listaFem.forEach(servico => {
-            console.log(`- ${servico.nome}: Consumido ${servico.consumo} vezes`)
-        });
-        console.log('---------------');
-        console.log('\nMASCULINO')
-        this.listaServico.listaMasc.forEach(servico => {
-            console.log(`- ${servico.nome}: Consumido ${servico.consumo} vezes`)
-        });
-        console.log('---------------');
-        console.log('\nNÃO-BINÁRIO')
-        this.listaServico.listaOutros.forEach(servico => {
-            console.log(`- ${servico.nome}: Consumido ${servico.consumo} vezes`)
-        });
+        while (exec) {
+            let entrada = new Entrada()
+            console.log("------------------------------------------------");
+            console.log(`Opção de Listagem.`);
+            console.log(`1 - Produto`);
+            console.log(`2 - Serviço`); 
+            let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+            switch (opcao) {
+                case 1:
+                    console.log('\nLista de produtos mais consumidos pelo público...')
+                    console.log('\nFEMININO')
+                    this.listaProduto.listaFem.forEach(produto => {
+                        console.log(`- ${produto.nome}: Consumido ${produto.consumo} vezes`)
+                    });
+                    console.log('---------------');
+                    console.log('\nMASCULINO')
+                    this.listaProduto.listaMasc.forEach(produto => {
+                        console.log(`- ${produto.nome}: Consumido ${produto.consumo} vezes`)
+                    });
+                    console.log('---------------');
+                    exec = false
+                    break
+                case 2:
+                    console.log('\nLista de serviços mais consumidos pelo público...');
+                    console.log('\nFEMININO')
+                    this.listaServico.listaFem.forEach(servico => {
+                        console.log(`- ${servico.nome}: Consumido ${servico.consumo} vezes`)
+                    });
+                    console.log('---------------');
+                    console.log('\nMASCULINO')
+                    this.listaServico.listaMasc.forEach(servico => {
+                        console.log(`- ${servico.nome}: Consumido ${servico.consumo} vezes`)
+                    });
+                    console.log('---------------');
+                    exec = false
+                    break
+                default:
+                    console.log(chalk.red(`Digite Uma Opção Válida!`));
+                    exec = true 
+                }
+        }
     }
 
 }

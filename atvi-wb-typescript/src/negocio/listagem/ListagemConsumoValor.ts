@@ -1,3 +1,5 @@
+import chalk from "chalk";
+import Entrada from "../../io/entrada";
 import Empresa from "../../modelo/empresa";
 import Listagem from "../listagem";
 
@@ -8,10 +10,10 @@ export default class ListagemComusumoValor extends Listagem {
         this.empresa = empresa;
     }
     public listar(): void {
-        const getValorTotal = (array) => {
+        const getValorTotal = (Array) => {
             let total = 0;
-            array.forEach(item => {
-                total = total + item.valor
+            Array.forEach(item => {
+                total = total + item.preco
             });
             return total;
         }
@@ -40,17 +42,42 @@ export default class ListagemComusumoValor extends Listagem {
             return 1
         });
 
-        console.log('\nListagem de 5 clientes que MAIS consumiram produtos em VALOR');
-        listaProduto.forEach((cliente, indice) => {
-            let txt = `${indice + 1}° - R$${getValorTotal(cliente.getProdutosConsumidos)} em produtos consumidos`
+        let exec = true
+        while (exec) {
+            let entrada = new Entrada()
+            console.log("------------------------------------------------");
+            console.log(`Opção de Listagem.`);
+            console.log(`1 - Produto`);
+            console.log(`2 - Serviço`); 
+            let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+            switch (opcao) {
+                case 1:
+                    console.log(chalk.greenBright('\nListagem de clientes que MAIS consumiram produtos em VALOR'));
+                    listaProduto.forEach((cliente, indice) => {
+                        let txt = `${indice + 1}° - R$${getValorTotal(cliente.getProdutosConsumidos)} em produtos consumidos`
 
-            console.log(`${indice + 1}° - ${cliente.nome}: ${txt}`)
-        });
-        console.log('\nListagem de 5 clientes que MAIS consumiram serviços em VALOR');
-        listaServico.forEach((cliente, indice) => {
-            let txt = `${indice + 1}° - R$${getValorTotal(cliente.getServicosConsumidos)} em produtos consumidos`
+                        console.log(`${indice + 1}° - ${cliente.nome}: ${txt}`)
+                    });
+                    exec = false
+                    break
+                case 2:
+                    console.log(chalk.greenBright('\nListagem de clientes que MAIS consumiram serviços em VALOR'));
+                    listaServico.forEach((cliente, indice) => {
 
-            console.log(`${indice + 1}° - ${cliente.nome}: ${txt}`)
-        })
-    }
+                        let txt = `${indice + 1}° - R$${getValorTotal(cliente.getServicosConsumidos)} em serviços consumidos`
+
+                        console.log(`${indice + 1}° - ${cliente.nome}: ${txt}`)
+                    });
+                    exec = false
+                    break
+                default:
+                    console.log(chalk.red(`Digite Uma Opção Válida!`));
+                    exec = true 
+                        
+
+            }
+        }
+        
+        
+        }
 }

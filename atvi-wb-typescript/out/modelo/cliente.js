@@ -82,6 +82,9 @@ var Cliente = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Cliente.prototype.getGeneroChar = function () {
+        return this.genero;
+    };
     return Cliente;
 }());
 exports.default = Cliente;
