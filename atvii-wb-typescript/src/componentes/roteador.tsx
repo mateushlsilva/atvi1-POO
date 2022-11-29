@@ -1,8 +1,10 @@
 import { Component } from "react";
 import BarraNavegacao from "./barraNavegacao";
+
 import FormularioCadastroCliente from "./cliente/formularioCadastroCliente";
 import ListaCliente from "./cliente/listaCliente";
 import ListaProduto from "./produto/listaProduto";
+import RouteIndex from "./routes/routeIndex";
 import ListaServico from "./servico/listaServico";
 import TelaCadastro from "./telaCadastro";
 
@@ -14,7 +16,7 @@ export default class Roteador extends Component<{}, state> {
     constructor(props: {} | Readonly<{}>) {
         super(props)
         this.state = {
-            tela: 'Clientes'
+            tela: 'TelaCadastro'
         }
         this.selecionarView = this.selecionarView.bind(this)
     }
@@ -28,7 +30,8 @@ export default class Roteador extends Component<{}, state> {
     }
 
     render() {
-        let barraNavegacao = <BarraNavegacao seletorView={this.selecionarView} tema="purple lighten-4" botoes={['Clientes', 'Produtos', 'Serviços' ,'Cadastros']} />
+        let barraNavegacao = <BarraNavegacao  botoes={['Clientes', 'Produtos', 'Serviços', 'Cadastros']} seletorView={this.selecionarView}  />
+        
         if (this.state.tela === 'Clientes') {
             return (
                 <>
@@ -59,14 +62,21 @@ export default class Roteador extends Component<{}, state> {
         //         </>
         //     )
         // }
-        else {
-            return (
+        else if(this.state.tela === 'Cadastros'){
+            return(
                 <>
                     {barraNavegacao}
                     <TelaCadastro tema="purple lighten-4" />
                 </>
             )
         }
+        // else {
+        //     return (
+        //         <>
+        //             <RouteIndex />
+        //         </>
+        //     )
+        // }
 
     }
 }

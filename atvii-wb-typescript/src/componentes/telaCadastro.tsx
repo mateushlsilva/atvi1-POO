@@ -4,26 +4,14 @@ import barraNavegacao from "./barraNavegacao";
 import FormularioCadastroCliente from "./cliente/formularioCadastroCliente";
 
 
-type props = {
-    tema: string
-}
-
-
-export default class TelaCadastro extends Component<props> {
+export default class TelaCadastro extends Component<any> {
     render() {
         let estiloBotao = `btn waves-effect waves-light `
-        //let estilo = `collection-item active ${this.props.tema}`
         return (
-            // <div className="collection">
-            //     <a className="collection-item" style={{color: '#FA652A'}} >Servico 1</a>
-            //     <a className="collection-item" style={{color: '#FA652A'}}>Servico 2</a>
-            //     <a className="collection-item" style={{color: '#FA652A'}}>Servico 3</a>
-            //     <a className="collection-item" style={{color: '#FA652A'}}>Servico 4</a>
-            // </div>
-            <div style={{backgroundColor: '#AD461E', paddingTop: '334px', paddingBlock: '170px' , textAlign: "center"}}>
+            <div style={{backgroundColor: '#AD461E', paddingTop: '334px', paddingBlock: '220px' , textAlign: "center"}}>
                     <h1 style={{color: "white"}}>Cadastros</h1>
                     <div style={{display: 'inline', marginLeft: '40px'}}>
-                        <a href="/cliente/formularioCadastroCliente">
+                        <a href="formularioCadastroCliente">
                             <button className={estiloBotao} style={{backgroundColor: '#d45624', paddingLeft: '20px', paddingRight: '25px'}} type="submit" name="action">Cadastro Cliente
                             </button>
                         </a>
@@ -39,13 +27,5 @@ export default class TelaCadastro extends Component<props> {
             </div>
         )
     }
-    // if ('/cliente/formularioCadastroCliente.tsx') {
-    //     return (
-    //         <>
-    //             {barraNavegacao}
-    //             <FormularioCadastroCliente tema="purple lighten-4" />
-    //         </>
-    //     )
-    // }
     
 }

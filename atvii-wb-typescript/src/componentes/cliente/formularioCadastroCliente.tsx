@@ -1,10 +1,7 @@
 import { Component } from "react";
 
-type props = {
-    tema: string
-}
 
-export default class FormularioCadastroCliente extends Component<props> {
+export default class FormularioCadastroCliente extends Component<any> {
     
     render() {
         let estiloBotao = `btn waves-effect waves-light `
@@ -43,3 +40,4 @@ export default class FormularioCadastroCliente extends Component<props> {
         )
     }
 }
+

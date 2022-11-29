@@ -3,13 +3,7 @@ import { Component } from "react";
 import 'materialize-css/dist/css/materialize.min.css'
 
 
-type props = {
-    tema: string
-}
-
-
-
-export default class ListaServico extends Component<props> {
+export default class ListaServico extends Component<any> {
     render() {
         //let estilo = `collection-item active ${this.props.tema}`
         return (
