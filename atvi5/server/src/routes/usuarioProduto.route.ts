@@ -11,6 +11,36 @@ usuarioProdutoRoute.get('/usuarioProduto', async(req: Request, res: Response, ne
     res.status(StatusCodes.OK).send(usuarioProdutoList)
 })
 
+usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(req: Request, res: Response, next: NextFunction)=>{
+    let produtoMP:any = []
+    let cont = 1
+    let n1 = 0
+    let n = 0
+    const usuarioProdutoList = await usuarioProduto.findAll({ attributes: ['produtoId'] });
+    usuarioProdutoList.forEach(prod => {
+        // produto.append(prod.produtoId)
+        n = prod.produtoId
+        if(n != n1){
+            if(cont > 1){
+                produtoMP.push({
+                    produtoId: n1,
+                    consumo: cont
+                })
+            }
+            n1 = n
+            cont = 1
+        }
+        else{
+            cont++
+        }
+    });
+    produtoMP.push({
+        produtoId: n,
+        consumo: cont
+    })
+    res.status(StatusCodes.OK).send(produtoMP)
+})
+
 usuarioProdutoRoute.get('/usuarioProduto/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
     const project = await usuarioProduto.findOne({ where: { id: uuid } })

@@ -15,16 +15,12 @@ const servicos = database.define('servicos', {
         allowNull: false
     },
     preco: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    consumo: {
-        type: Sequelize.STRING,
+        type: Sequelize.FLOAT,
         allowNull: false
     }
 })
 
 
-servicos.sync({ alter: true });
+//servicos.sync({ alter: true });
 
 module.exports = servicos;

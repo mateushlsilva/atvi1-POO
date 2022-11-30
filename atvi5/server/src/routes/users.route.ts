@@ -10,6 +10,16 @@ usersRoute.get('/users', async(req: Request, res: Response, next: NextFunction)=
     res.status(StatusCodes.OK).send(usersList)
 })
 
+usersRoute.get('/users/masculino', async(req: Request, res: Response, next: NextFunction)=>{
+    const usersList = await users.findAll({ where: { genero: 'Masculino' } });
+    res.status(StatusCodes.OK).send(usersList)
+})
+
+usersRoute.get('/users/feminino', async(req: Request, res: Response, next: NextFunction)=>{
+    const usersList = await users.findAll({ where: { genero: 'Feminino' } });
+    res.status(StatusCodes.OK).send(usersList)
+})
+
 usersRoute.get('/users/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
     const project = await users.findOne({ where: { email: uuid } })
@@ -39,6 +49,16 @@ usersRoute.get('/users/id/:uuid', async(req: Request<{ uuid: string }>, res: Res
 
 usersRoute.post('/users/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newUser = req.body
+    const genero = req.body.genero
+    
+    if(genero[0].toUpperCase() == 'M'){
+        newUser.genero = "Masculino"
+    }else if(genero[0].toUpperCase() == 'F'){
+        newUser.genero = "Feminino"
+    }else{
+        newUser.genero = null
+    }
+    
     await users.create(newUser)
     .then(() =>{
         return res.json({

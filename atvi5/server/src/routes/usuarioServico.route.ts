@@ -25,6 +25,35 @@ usuarioServicoRoute.get('/usuarioServico/:uuid', async(req: Request<{ uuid: stri
     }
 })
 
+usuarioServicoRoute.get('/usuarioServico/listagemServicoMaisConsumido', async(req: Request, res: Response, next: NextFunction)=>{
+    let servico:any = []
+    let cont = 1
+    let n1 = 0
+    let n = 0
+    const usuarioServicoList = await usuarioServico.findAll({ attributes: ['servicoId'] });
+    usuarioServicoList.forEach(serv => {
+        n = serv.servicoId
+        if(n != n1){
+            if(cont > 1){
+                servico.push({
+                    servicoId: n1,
+                    consumo: cont
+                })
+            }
+            n1 = n
+            cont = 1
+        }
+        else{
+            cont++
+        }
+    });
+    servico.push({
+        servicoId: n,
+        consumo: cont
+    })
+    res.status(StatusCodes.OK).send(servico)
+})
+
 usuarioServicoRoute.post('/usuarioServico/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newusuarioServico = req.body
     await usuarioServico.create(newusuarioServico)

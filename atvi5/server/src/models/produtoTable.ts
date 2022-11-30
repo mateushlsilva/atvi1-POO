@@ -15,16 +15,12 @@ const produtos = database.define('produtos', {
         allowNull: false
     },
     preco: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    consumo: {
-        type: Sequelize.STRING,
+        type: Sequelize.FLOAT,
         allowNull: false
     }
 })
 
 
-produtos.sync({ alter: true });
+//produtos.sync({ alter: true });
 
 module.exports = produtos;

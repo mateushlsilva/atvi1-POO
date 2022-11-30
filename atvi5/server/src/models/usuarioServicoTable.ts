@@ -22,13 +22,13 @@ const usuarioServicos = database.define('usuarioServicos', {
           key: 'id'
         }
       },
-      servicoId: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: servicoId, 
-            key: 'id'
-         }
-      }
+    servicoId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: servicoId, 
+          key: 'id'
+        }
+    }
 })
 
 //usuarioServicos.sync({ alter: true });
