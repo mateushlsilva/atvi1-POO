@@ -21,10 +21,7 @@ const telefones = database.define('telefones', {
         unique: true
     }
 })
-// telefones.belongsTo(usersId, {
-//     constraint: true,
-//     foreignKey: 'usersId'
-// })
+
 
 //telefones.sync({ alter: true });
 

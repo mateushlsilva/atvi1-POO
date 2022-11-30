@@ -5,10 +5,10 @@ const database = require('./connect')
 const usersId = require('./userTable')
 const telefoneId = require('./telefoneTable')
 
-usersId.belongsToMany(telefoneId, { through: 'usuarioServicos' });
-telefoneId.belongsToMany(usersId, { through: 'usuarioServicos' });
+usersId.belongsToMany(telefoneId, { through: 'usuarioTelefones' });
+telefoneId.belongsToMany(usersId, { through: 'usuarioTelefones' });
 
-const usuarioTelefone = database.define('usuarioTelefone', {
+const usuarioTelefone = database.define('usuarioTelefones', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,

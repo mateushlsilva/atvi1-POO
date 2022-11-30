@@ -6,7 +6,7 @@ import { Sequelize } from 'sequelize'
 //       dialect: 'mysql'
 // })
 
-const connection = new Sequelize("wb", "root", "fatecsjc", {
+const connection = new Sequelize("wb", "root", "fatec", {
        host: 'localhost',
        dialect: 'mysql'
 })
