@@ -7,8 +7,8 @@ const usuarioServico = require('../models/usuarioServicoTable')
 
 
 usuarioServicoRoute.get('/usuarioServico', async(req: Request, res: Response, next: NextFunction)=>{
-    const usuarioServicoList = await usuarioServico.findAll();
-    res.status(StatusCodes.OK).send(usuarioServicoList)
+    const usuarioProdutoList = await usuarioServico.findAll();
+    res.status(StatusCodes.OK).send(usuarioProdutoList)
 })
 
 usuarioServicoRoute.get('/usuarioServico/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
