@@ -33,7 +33,7 @@ type table = {
     resultPM: any[],
     resultPF: any[],
     resultSM: any[],
-    resultSF: any[],
+    resultSF: any[]
 }
 
 export default class Listagens extends Component<{}, table> {

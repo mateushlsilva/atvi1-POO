@@ -210,6 +210,32 @@ usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(re
     res.status(StatusCodes.OK).send(proP)
 })
 
+usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoPedidos', async(req: Request, res: Response, next: NextFunction)=>{
+    let produtoMP:any = []
+    const usuarioProdutoList = await usuarioProduto.findAll();
+    const produtoList = await tabelaProduto.findAll()
+    const usuarioList = await tabelaUsuario.findAll()
+    usuarioProdutoList.forEach(prod => {
+        usuarioList.forEach(user => {
+            if(prod.userId == user.id ){
+                produtoList.forEach(p => {
+                    if(p.id == prod.produtoId){
+                        produtoMP.push({
+                            cliente: user.name,
+                            cpf: user.cpf,
+                            produto: p.nome,
+                            valor: p.preco
+                        })
+                    }
+                })
+            }
+        })
+        
+        
+    });
+    res.status(StatusCodes.OK).send(produtoMP)
+})
+
 
 usuarioProdutoRoute.get('/usuarioProduto/listagemClienteProdutoConsumidoQuantidade', async(req: Request, res: Response, next: NextFunction)=>{
     let userMP:any = []

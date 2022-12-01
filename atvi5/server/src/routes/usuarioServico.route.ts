@@ -212,6 +212,32 @@ usuarioServicoRoute.get('/usuarioServico/listagemServicoMaisConsumido', async(re
     res.status(StatusCodes.OK).send(ser)
 })
 
+
+usuarioServicoRoute.get('/usuarioServico/listagemServicoPedidos', async(req: Request, res: Response, next: NextFunction)=>{
+    let produtoMP:any = []
+    const usuarioProdutoList = await usuarioServico.findAll();
+    const servicoList = await tabelaServico.findAll()
+    const usuarioList = await tabelaUsuario.findAll()
+    usuarioProdutoList.forEach(prod => {
+        usuarioList.forEach(user => {
+            if(prod.userId == user.id ){
+                servicoList.forEach(s => {
+                    if(s.id == prod.servicoId){
+                        produtoMP.push({
+                            cliente: user.name,
+                            cpf: user.cpf,
+                            produto: s.nome,
+                            valor: s.preco
+                        })
+                    }
+                })
+            }
+        })
+    });
+    res.status(StatusCodes.OK).send(produtoMP)
+})
+
+
 usuarioServicoRoute.get('/usuarioServico/listagemClienteServicoConsumidoQuantidade', async(req: Request, res: Response, next: NextFunction)=>{
     let userMP:any = []
     let userP:any = []
