@@ -1,6 +1,7 @@
 import { Component } from "react";
 import 'materialize-css/dist/css/materialize.min.css'
 import CSS from 'csstype'
+import axios from "axios"
 
 const backgroundColor: CSS.Properties = {
     backgroundColor: '#0077ff',
@@ -12,10 +13,201 @@ const fontStyle: CSS.Properties = {
     fontSize:'xx-large',
     fontFamily: 'fantasy',
 }
-export default class Listagens extends Component<any> {
+
+type table = {
+    id: string,
+    name: string,
+    nome: string,
+    cpf: number,
+    valorP: number,
+    valorS: number,
+    preco: number,
+    dadosUsP: any[],
+    dadosUsS: any[],
+    cliConP: any[],
+    cliConS: any[],
+    cliComPM: any[],
+    cliComSM: any[],
+    pro: any[],
+    ser: any[],
+    resultPM: any[],
+    resultPF: any[],
+    resultSM: any[],
+    resultSF: any[],
+}
+
+export default class Listagens extends Component<{}, table> {
+    constructor(props: any){
+        super(props)
+        this.state = {
+            id: '',
+            name: '',
+            nome: '',
+            cpf: 0,
+            valorP: 0,
+            valorS: 0,
+            preco: 0,
+            dadosUsP: [],
+            dadosUsS: [],
+            cliConP: [],
+            cliConS: [],
+            cliComPM: [],
+            cliComSM: [],
+            pro: [],
+            ser: [],
+            resultPM: [],
+            resultPF: [],
+            resultSM: [],
+            resultSF: []
+        }
+    }
     componentDidMount() {
         console.log(M);
         M.AutoInit();
+        axios.get('http://localhost:3001/usuarioProduto/ClienteConsumoValor').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.valor - a.valor
+            })
+            this.setState({
+                dadosUsP: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioServico/ClienteConsumoValor').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.valor - a.valor
+            })
+            this.setState({
+                dadosUsS: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioProduto/listagemClienteProdutoConsumidoQuantidade').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.consumo - a.consumo
+            })
+            this.setState({
+                cliConP: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioProduto/listagemClienteProdutoConsumidoQuantidade').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return a.consumo - b.consumo
+            })
+            this.setState({
+                cliComPM: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioServico/listagemClienteServicoConsumidoQuantidade').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.consumo - a.consumo
+            })
+            this.setState({
+                cliConS: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioServico/listagemClienteServicoConsumidoQuantidade').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return a.consumo - b.consumo
+            })
+            this.setState({
+                cliComSM: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioProduto/listagemProdutoMaisConsumido').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.consumo - a.consumo
+            })
+            this.setState({
+                pro: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioServico/listagemServicoMaisConsumido').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.consumo - a.consumo
+            })
+            this.setState({
+                ser: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioProduto/generoMasculino').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.quantidade - a.quantidade
+            })
+            this.setState({
+                resultPM: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioProduto/generoFeminino').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.quantidade - a.quantidade
+            })
+            this.setState({
+                resultPF: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioServico/generoMasculino').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.quantidade - a.quantidade
+            })
+            this.setState({
+                resultSM: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+        axios.get('http://localhost:3001/usuarioServico/generoFeminino').then(res => {
+            let dados = res.data
+            dados.sort(function(a:any,b:any){
+                return b.quantidade - a.quantidade
+            })
+            this.setState({
+                resultSF: dados
+            })   
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
     }
 render() {
     return (
@@ -48,23 +240,49 @@ render() {
                     </div>
                     <div id="1" className="col s12">
                         <form>
+                            <h5 className='generoConsumoFont'>Produto</h5>
                             <div>
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome</th>
                                             <th>CPF</th>
-                                            <th>Telefone</th>
+                                            <th>Valor</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {this.state.dadosUsP.map(itemP => {
+                                            return(
+                                                <tr>
+                                                    <td>{itemP.nome}</td>
+                                                    <td>{itemP.cpf}</td>
+                                                    <td>R$ {itemP.valor}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 className='generoConsumoFont'>Serviço</h5>
+                            <div>
+                                <table className='responsive-table centered'>
+                                    <thead>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Cliente 1</td>
-                                            <td>000.000.000.00</td>
-                                            <td>(00)00000-0000</td>
+                                            <th>Nome</th>
+                                            <th>CPF</th>
+                                            <th>Valor</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.dadosUsS.map(itemP => {
+                                                return(
+                                                    <tr>
+                                                        <td>{itemP.nome}</td>
+                                                        <td>{itemP.cpf}</td>
+                                                        <td>R$ {itemP.valor}</td>
+                                                    </tr>
+                                                )
+                                            })}
                                     </tbody>
                                 </table>
                             </div>
@@ -74,23 +292,49 @@ render() {
 
                     <div id="2" className="col s12">
                         <form>
+                            <h5 className='generoConsumoFont'>Produto</h5>
                             <div>
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome</th>
                                             <th>CPF</th>
                                             <th>Total Consumido</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {this.state.cliConP.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.cpf}</td>
+                                                    <td>{item.consumo}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 className='generoConsumoFont'>Serviço</h5>
+                            <div>
+                                <table className='responsive-table centered'>
+                                    <thead>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Cliente 1</td>
-                                            <td>000.000.000.00</td>
-                                            <td>...</td>
+                                            <th>Nome</th>
+                                            <th>CPF</th>
+                                            <th>Total Consumido</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.cliConS.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.cpf}</td>
+                                                    <td>{item.consumo}</td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
@@ -99,48 +343,99 @@ render() {
                     </div>
 
                     <div id="3" className="col s12">
-                        <form>
-                            <div>
-                                <table className='responsive-table centered'>
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Nome</th>
-                                            <th>CPF</th>
-                                            <th>Total consumido</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Cliente 1</td>
-                                            <td>000.000.000.00</td>
-                                            <td>...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
+                    <form>
+                        <h5 className='generoConsumoFont'>Produto</h5>
+                        <div>
+                            <table className='responsive-table centered'>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Total Consumido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.cliComPM.map(item => {
+                                        return(
+                                            <tr>
+                                                <td>{item.nome}</td>
+                                                <td>{item.cpf}</td>
+                                                <td>{item.consumo}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 className='generoConsumoFont'>Serviço</h5>
+                        <div>
+                            <table className='responsive-table centered'>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Total Consumido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.state.cliComSM.map(item => {
+                                        return(
+                                            <tr>
+                                                <td>{item.nome}</td>
+                                                <td>{item.cpf}</td>
+                                                <td>{item.consumo}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+
 
                     </div>
 
                     <div id="4" className="col s12">
                         <form>
+                            <h5 className='generoConsumoFont'>Produto</h5>
                             <div>
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Nome do Produto/Serviço</th>
-                                            <th>Valor do Produto/Serviço</th>
+                                            <th>Nome</th>
+                                            <th>Total Consumido</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {this.state.pro.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.consumo}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 className='generoConsumoFont'>Serviço</h5>
+                            <div>
+                                <table className='responsive-table centered'>
+                                    <thead>
                                         <tr>
-                                            <td>1</td>
-                                            <td>...</td>
-                                            <td>...</td>
+                                            <th>Nome</th>
+                                            <th>Total Consumido</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.ser.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.consumo}</td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
@@ -150,42 +445,87 @@ render() {
 
                     <div id="5" className="col s12">
                         <form>
-                            <h5 className='generoConsumoFont'>Feminino</h5>
+                        <h5 className='generoConsumoFont'>Produtos com consumidos pelo publico Masculino </h5>
                             <div>
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Nome do Produto/Serviço</th>
-                                            <th>Valor do Produto/Serviço</th>
+                                            <th>Nome</th>
+                                            <th>Total Consumido</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>...</td>
-                                            <td>...</td>
-                                        </tr>
+                                        {this.state.resultPM.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.quantidade}</td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
-                            <br></br>
-                            <h5 className='generoConsumoFont'>Masculino</h5>
+                            <h5 className='generoConsumoFont'>Serviços com consumidos pelo publico Masculino</h5>
                             <div>
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Nome do Produto/Serviço</th>
-                                            <th>Valor do Produto/Serviço</th>
+                                            <th>Nome</th>
+                                            <th>Total Consumido</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {this.state.resultSM.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.quantidade}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 className='generoConsumoFont'>Produtos com consumidos pelo publico Feminino </h5>
+                            <div>
+                                <table className='responsive-table centered'>
+                                    <thead>
                                         <tr>
-                                            <td>1</td>
-                                            <td>...</td>
-                                            <td>...</td>
+                                            <th>Nome</th>
+                                            <th>Total Consumido</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.resultPF.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.quantidade}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 className='generoConsumoFont'>Serviços com consumidos pelo publico Feminino</h5>
+                            <div>
+                                <table className='responsive-table centered'>
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Total Consumido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.state.resultSF.map(item => {
+                                            return(
+                                                <tr>
+                                                    <td>{item.nome}</td>
+                                                    <td>{item.quantidade}</td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

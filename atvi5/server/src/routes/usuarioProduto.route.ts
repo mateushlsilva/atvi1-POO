@@ -78,6 +78,7 @@ usuarioProdutoRoute.get('/usuarioProduto/ClienteConsumoValor', async(req: Reques
             if(user.id == cli.nome){
                 produ.push({
                     nome: user.name,
+                    cpf: user.cpf,
                     valor: cli.consumo
                 })
             }
@@ -169,10 +170,12 @@ usuarioProdutoRoute.get('/usuarioProduto/generoFeminino', async(req: Request, re
 
 usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(req: Request, res: Response, next: NextFunction)=>{
     let produtoMP:any = []
+    let proP:any = []
     let cont = 0
     let n1 = 0
     let n = 0
     const usuarioProdutoList = await usuarioProduto.findAll({ attributes: ['produtoId'] });
+    const produtoList = await tabelaProduto.findAll()
     usuarioProdutoList.forEach(prod => {
         // produto.append(prod.produtoId)
         n = prod.produtoId
@@ -194,16 +197,28 @@ usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(re
         produtoId: n,
         consumo: cont
     })
-    res.status(StatusCodes.OK).send(produtoMP)
+    produtoList.forEach(usu => {
+        produtoMP.forEach(p => {
+            if(usu.id == p.produtoId){
+                proP.push({
+                    nome: usu.nome,
+                    consumo: p.consumo
+                })
+            }
+        })
+    })
+    res.status(StatusCodes.OK).send(proP)
 })
 
 
 usuarioProdutoRoute.get('/usuarioProduto/listagemClienteProdutoConsumidoQuantidade', async(req: Request, res: Response, next: NextFunction)=>{
     let userMP:any = []
+    let userP:any = []
     let cont = 0
     let n1 = 0
     let n = 0
     const usuarioProdutoList = await usuarioProduto.findAll({ attributes: ['userId'] });
+    const tabelaUsu = await tabelaUsuario.findAll();
     console.log(usuarioProdutoList);
     
     usuarioProdutoList.forEach(user => {
@@ -228,9 +243,19 @@ usuarioProdutoRoute.get('/usuarioProduto/listagemClienteProdutoConsumidoQuantida
         userId: n,
         consumo: cont
     })
-    console.log(userMP);
-    
-    res.status(StatusCodes.OK).send(userMP)
+
+    tabelaUsu.forEach(usu => {
+        userMP.forEach(cli => {
+            if(usu.id == cli.userId){
+                userP.push({
+                    nome: usu.name,
+                    cpf: usu.cpf,
+                    consumo: cli.consumo
+                })
+            }
+        })
+    })
+    res.status(StatusCodes.OK).send(userP)
 })
 
 
