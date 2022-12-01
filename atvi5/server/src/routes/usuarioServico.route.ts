@@ -167,7 +167,6 @@ usuarioServicoRoute.get('/usuarioServico/:uuid', async(req: Request<{ uuid: stri
     }
 })
 
-
 usuarioServicoRoute.post('/usuarioServico/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newusuarioServico = req.body
     await usuarioServico.create(newusuarioServico)
