@@ -20,6 +20,7 @@ usersRoute.get('/users/feminino', async(req: Request, res: Response, next: NextF
     res.status(StatusCodes.OK).send(usersList)
 })
 
+/*
 usersRoute.get('/users/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
     const project = await users.findOne({ where: { email: uuid } })
@@ -32,7 +33,8 @@ usersRoute.get('/users/:uuid', async(req: Request<{ uuid: string }>, res: Respon
     } else {
         return res.json(project)
     }
-})
+})*/
+
 usersRoute.get('/users/id/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
     const project = await users.findOne({ where: { id: uuid } })

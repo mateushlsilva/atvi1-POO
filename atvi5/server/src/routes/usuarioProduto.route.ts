@@ -3,17 +3,98 @@ import { StatusCodes } from 'http-status-codes';
 
 const usuarioProdutoRoute = Router();
 const usuarioProduto = require('../models/usuarioProdutoTable')
-
-
+const tabelaUsuario = require('../models/userTable')
+const tabelaProduto = require('../models/produtoTable')
 
 usuarioProdutoRoute.get('/usuarioProduto', async(req: Request, res: Response, next: NextFunction)=>{
     const usuarioProdutoList = await usuarioProduto.findAll();
     res.status(StatusCodes.OK).send(usuarioProdutoList)
 })
 
+usuarioProdutoRoute.get('/usuarioProduto/generoMasculino', async(req: Request, res: Response, next: NextFunction)=>{
+    const usuarioMasList = await tabelaUsuario.findAll({ where: { genero: "Masculino" } })
+    // const usuarioFemList = await tabelaUsuario.findAll({ where: { genero: "Feminino" } })
+    const produtoList = await tabelaProduto.findAll()
+    const usuarioProdutoList = await usuarioProduto.findAll();
+
+    let listProdM:any ={}
+    let produ:any = []
+    let cont = -1
+
+    usuarioProdutoList.forEach(dados => {
+        let proId = dados.produtoId
+        let userId = dados.userId
+        usuarioMasList.forEach(mas => {
+            if(mas.id == userId){
+                produtoList.forEach(prod => {
+                    if(prod.id == proId){
+                        produ.push(prod.id)
+                    }
+                })
+            }
+        })
+    })
+    produ.forEach((count) => {
+        listProdM[count] = (listProdM[count] || 0) + 1
+    })
+    produ = []
+    produtoList.forEach(p => {
+        Object.keys(listProdM).forEach((id) => {
+            if(p.id == id){
+                cont++
+                produ.push({
+                    nome: p.nome,
+                    quantidade: Object.values(listProdM)[cont]
+                })
+            }
+        })
+    });
+    res.status(StatusCodes.OK).send(produ)
+})
+
+usuarioProdutoRoute.get('/usuarioProduto/generoFeminino', async(req: Request, res: Response, next: NextFunction)=>{
+    const usuarioFemList = await tabelaUsuario.findAll({ where: { genero: "Feminino" } })
+    const produtoList = await tabelaProduto.findAll()
+    const usuarioProdutoList = await usuarioProduto.findAll();
+
+    let listProdF:any ={}
+    let produ:any = []
+    let cont = -1
+
+    usuarioProdutoList.forEach(dados => {
+        let proId = dados.produtoId
+        let userId = dados.userId
+        usuarioFemList.forEach(mas => {
+            if(mas.id == userId){
+                produtoList.forEach(prod => {
+                    if(prod.id == proId){
+                        produ.push(prod.id)
+                    }
+                })
+            }
+        })
+    })
+    produ.forEach((count) => {
+        listProdF[count] = (listProdF[count] || 0) + 1
+    })
+    produ = []
+    produtoList.forEach(p => {
+        Object.keys(listProdF).forEach((id) => {
+            if(p.id == id){
+                cont++
+                produ.push({
+                    nome: p.nome,
+                    quantidade: Object.values(listProdF)[cont]
+                })
+            }
+        })
+    });
+    res.status(StatusCodes.OK).send(produ)
+})
+
 usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(req: Request, res: Response, next: NextFunction)=>{
     let produtoMP:any = []
-    let cont = 1
+    let cont = 0
     let n1 = 0
     let n = 0
     const usuarioProdutoList = await usuarioProduto.findAll({ attributes: ['produtoId'] });
@@ -21,7 +102,7 @@ usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(re
         // produto.append(prod.produtoId)
         n = prod.produtoId
         if(n != n1){
-            if(cont > 1){
+            if(cont >= 1){
                 produtoMP.push({
                     produtoId: n1,
                     consumo: cont
@@ -40,6 +121,43 @@ usuarioProdutoRoute.get('/usuarioProduto/listagemProdutoMaisConsumido', async(re
     })
     res.status(StatusCodes.OK).send(produtoMP)
 })
+
+
+usuarioProdutoRoute.get('/usuarioProduto/listagemClienteProdutoConsumidoQuantidade', async(req: Request, res: Response, next: NextFunction)=>{
+    let userMP:any = []
+    let cont = 0
+    let n1 = 0
+    let n = 0
+    const usuarioProdutoList = await usuarioProduto.findAll({ attributes: ['userId'] });
+    console.log(usuarioProdutoList);
+    
+    usuarioProdutoList.forEach(user => {
+        n = user.userId
+        
+        if(n != n1){
+            if(cont >= 1){
+                userMP.push({
+                    userId: n1,
+                    consumo: cont
+                })
+            }
+            n1 = n
+            cont = 1
+        }
+        else{
+            cont++
+        }
+        
+    });
+    userMP.push({
+        userId: n,
+        consumo: cont
+    })
+    console.log(userMP);
+    
+    res.status(StatusCodes.OK).send(userMP)
+})
+
 
 usuarioProdutoRoute.get('/usuarioProduto/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
