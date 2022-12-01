@@ -11,9 +11,84 @@ usuarioProdutoRoute.get('/usuarioProduto', async(req: Request, res: Response, ne
     res.status(StatusCodes.OK).send(usuarioProdutoList)
 })
 
+usuarioProdutoRoute.get('/usuarioProduto/ClienteConsumoValor', async(req: Request, res: Response, next: NextFunction)=>{
+    const usuarioList = await tabelaUsuario.findAll()
+    const produtoList = await tabelaProduto.findAll()
+    const usuarioProdutoList = await usuarioProduto.findAll();
+
+    let listProdM:any = []
+    let produ:any = []
+    let cont = 0
+    let n1 = 0
+    let n = 0
+    let s = 0
+    let v = 0
+    let v1 = 0
+    let c = 0
+
+    usuarioProdutoList.sort(function(a,b){
+        return a.userId - b.userId
+    })
+    usuarioProdutoList.forEach(dados => {
+        let proId = dados.produtoId
+        let userId = dados.userId
+        produtoList.forEach(prod => {
+            if(prod.id == proId){
+                produ.push({
+                    nome: userId,
+                    valor: prod.preco
+                })
+            }
+        })
+    })
+    produ.forEach(cli => {
+        n = cli.nome
+        v = cli.valor
+        if(n != n1){
+            if(cont >= 1){
+                listProdM.push({
+                    nome: n1,
+                    consumo: s
+                })
+            }
+            s = v
+            n1 = n
+            cont = 1
+            c++
+        }
+        else{
+            v1 = v
+            if(produ.length >= c){
+                s = s + v
+            }else{
+                s = v + v1
+            }
+            cont++
+            c++
+        }
+   
+    });
+    listProdM.push({
+        nome: n,
+        consumo: s
+    })
+    produ = []
+    usuarioList.forEach(user => {
+        listProdM.forEach(cli =>{
+            if(user.id == cli.nome){
+                produ.push({
+                    nome: user.name,
+                    valor: cli.consumo
+                })
+            }
+        })
+    });
+    listProdM = []
+    res.status(StatusCodes.OK).send(produ)
+})
+
 usuarioProdutoRoute.get('/usuarioProduto/generoMasculino', async(req: Request, res: Response, next: NextFunction)=>{
     const usuarioMasList = await tabelaUsuario.findAll({ where: { genero: "Masculino" } })
-    // const usuarioFemList = await tabelaUsuario.findAll({ where: { genero: "Feminino" } })
     const produtoList = await tabelaProduto.findAll()
     const usuarioProdutoList = await usuarioProduto.findAll();
 

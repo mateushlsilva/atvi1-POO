@@ -93,6 +93,83 @@ usuarioServicoRoute.get('/usuarioServico/generoFeminino', async(req: Request, re
     res.status(StatusCodes.OK).send(servi)
 })
 
+usuarioServicoRoute.get('/usuarioServico/ClienteConsumoValor', async(req: Request, res: Response, next: NextFunction)=>{
+    const usuarioList = await tabelaUsuario.findAll()
+    const servicoList = await tabelaServico.findAll()
+    const usuarioServicoList = await usuarioServico.findAll();
+
+    let listSerM:any = []
+    let serv:any = []
+    let cont = 0
+    let n1 = 0
+    let n = 0
+    let s = 0
+    let v = 0
+    let v1 = 0
+    let c = 0
+
+    usuarioServicoList.sort(function(a,b){
+        return a.userId - b.userId
+    })
+    usuarioServicoList.forEach(dados => {
+        let serId = dados.servicoId
+        let userId = dados.userId
+        servicoList.forEach(serve => {
+            if(serve.id == serId){
+                serv.push({
+                    nome: userId,
+                    valor: serve.preco
+                })
+            }
+        })
+    })
+    serv.forEach(cli => {
+        n = cli.nome
+        v = cli.valor
+        if(n != n1){
+            if(cont >= 1){
+                listSerM.push({
+                    nome: n1,
+                    consumo: s
+                })
+            }
+            s = v
+            n1 = n
+            cont = 1
+            c++
+        }
+        else{
+            v1 = v
+            if(serv.length >= c){
+                s = s + v
+            }else{
+                s = v + v1
+            }
+            cont++
+            c++
+        }
+   
+    });
+    listSerM.push({
+        nome: n,
+        consumo: s
+    })
+    serv = []
+    usuarioList.forEach(user => {
+        listSerM.forEach(cli =>{
+            if(user.id == cli.nome){
+                serv.push({
+                    nome: user.name,
+                    valor: cli.consumo
+                })
+            }
+        })
+    });
+    listSerM = []
+    res.status(StatusCodes.OK).send(serv)
+})
+
+
 usuarioServicoRoute.get('/usuarioServico/listagemServicoMaisConsumido', async(req: Request, res: Response, next: NextFunction)=>{
     let servico:any = []
     let cont = 0
