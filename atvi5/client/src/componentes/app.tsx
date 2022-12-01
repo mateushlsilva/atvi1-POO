@@ -1,13 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Home from "./home";
-import ListaCliente from "./cliente/listaCliente";
+// import ListaCliente from "./cliente/listaCliente";
 import FormularioCadastroCliente from "./cadastros/formularioCadastroCliente";
 // import ListaProduto from "./listaProduto";
 import FormularioCadastroProduto from "./cadastros/formularioCadastroProduto";
 import FormularioCadastroServico from './cadastros/formularioCadastroServico';
 import FormularioCadastroPedido from './cadastros/formularioCadastroPedido';
 import Produtos from './produto/produtos';
-import ListaPedidos from './produto/listaPedidos';
+// import ListaPedidos from './produto/listaPedidos';
 import Pedidos from './pedidos';
 import Clientes from './cliente/clientes';
 import Servicos from './servico/servicos';
@@ -21,9 +21,9 @@ import Listagens from './Listagens';
       <Route index element={<Home/>}/>
       <Route path="*" element={<Navigate to="/"/>}/>
       <Route path="/Listagens" element={<Listagens/>}/>
-      <Route path="/listaCliente" element={<ListaCliente/>}/>
+      {/* <Route path="/listaCliente" element={<ListaCliente/>}/> */}
       {/* <Route path="/listaProduto" element={<ListaProduto/>}/> */}
-      <Route path="/listaPedidos" element={<ListaPedidos/>}/>
+      {/* <Route path="/listaPedidos" element={<ListaPedidos/>}/> */}
       {/* <Route path="/listaServicos" element={<ListaSevicos/>}/> */}
       <Route path="/formularioCadastroCliente" element={<FormularioCadastroCliente/>}/>
       <Route path="/formularioCadastroProduto" element={<FormularioCadastroProduto/>}/>

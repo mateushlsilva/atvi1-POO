@@ -63,10 +63,10 @@ export default class Servicos extends Component<{}, table> {
                 <div  style={backgroundColor}  className="nav-wrapper">
                     <a className="brand-logo center" style={fontStyle}>WB</a>
                     <a style={botaoStyle} href="/Home">Home</a>
-                    <a style={botaoStyle} href="/listaCliente">Cliente</a>
-                    <a style={botaoStyle} href="/listaProduto">Produto</a>
-                    <a style={botaoStyle} href="/listaPedidos">Pedidos</a>
-                    <a style={botaoStyle} href="/listaServicos">Serviços</a>
+                    <a style={botaoStyle} href="/clientes">Cliente</a>
+                    <a style={botaoStyle} href="/produtos">Produto</a>
+                    <a style={botaoStyle} href="/pedidos">Pedidos</a>
+                    <a style={botaoStyle} href="/servicos">Serviços</a>
                     <a style={botaoStyle} href="/Listagens">Listagens</a>
                 </div>
                 </nav>
