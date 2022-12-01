@@ -46,10 +46,6 @@ export default class FormularioCadastroProduto extends Component<any, props> {
                             <input id="preco" type="text" className="validate" />
                             <label htmlFor="preco">Preço</label>
                         </div>
-                        <div className="input-field col s6">
-                            <input id="descricao" type="text" className="validate" />
-                            <label htmlFor="descricao">Descrição</label>
-                        </div>
                     </div>
                     <div className="row">
                         <div className="col s12">

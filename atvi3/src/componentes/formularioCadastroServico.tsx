@@ -45,12 +45,6 @@ const FormularioCadastroServico = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="input-field col s6">
-                            <input id="Descricao_servico" type="text" className="validate" />
-                            <label htmlFor="Descricao_servico">Descrição do serviço</label>
-                        </div>
-                    </div>
-                    <div className="row">
                         <div className="col s12">
                             <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action">Cadastrar Serviço
                                 <i className="material-icons right">send</i>
