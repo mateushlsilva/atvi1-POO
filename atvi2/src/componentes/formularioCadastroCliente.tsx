@@ -15,7 +15,6 @@ const fontStyle: CSS.Properties = {
     fontFamily: 'fantasy',
 }
 export default class FormularioCadastroCliente extends Component<any,props> {
-    
     render() {
         let estiloBotao = `btn waves-effect waves-light ${this.props.tema}`
         let estilo = `${this.props.tema}`
@@ -50,22 +49,18 @@ export default class FormularioCadastroCliente extends Component<any,props> {
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="data_nascimento" type="text" className="validate" />
-                            <label htmlFor="data_nascimento">Data de nascimento</label>
-                        </div>
-                        <div className="input-field col s6">
                             <input id="cpf" type="email" className="validate" />
                             <label htmlFor="cpf">CPF</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <input id="genero" type="text" className="validate" />
-                            <label htmlFor="genero">Gênero</label>
                         </div>
                         <div className="input-field col s6">
                             <input id="rg" type="email" className="validate" />
                             <label htmlFor="rg">RG</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <input id="genero" type="email" className="validate" />
+                            <label htmlFor="genero">Gênero</label>
                         </div>
                     </div>
                     <div className="row">
