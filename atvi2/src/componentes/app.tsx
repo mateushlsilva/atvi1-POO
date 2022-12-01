@@ -22,9 +22,9 @@ import Listagens from './Listagens';
       <Route path="*" element={<Navigate to="/"/>}/>
       <Route path="/Listagens" element={<Listagens/>}/>
       <Route path="/listaCliente" element={<ListaCliente/>}/>
-      <Route path="/listaProduto" element={<ListaProduto/>}/>
+      <Route path="/listaProduto" element={<Produtos/>}/>
       <Route path="/listaPedidos" element={<ListaPedidos/>}/>
-      <Route path="/listaServicos" element={<ListaSevicos/>}/>
+      <Route path="/listaServicos" element={<Servicos/>}/>
       <Route path="/formularioCadastroCliente" element={<FormularioCadastroCliente/>}/>
       <Route path="/formularioCadastroProduto" element={<FormularioCadastroProduto/>}/>
       <Route path="/formularioCadastroServico" element={<FormularioCadastroServico/>}/>

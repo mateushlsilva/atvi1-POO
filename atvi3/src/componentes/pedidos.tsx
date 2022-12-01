@@ -37,14 +37,10 @@ const Pedidos = () => {
                         <th>Nome</th>
                         <th>Nome Social</th>
                         <th>CPF</th>
-                        <th>RG</th>
-                        <th>CPF</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
@@ -56,16 +52,12 @@ const Pedidos = () => {
             <table className='highlight centered'>
                 <thead>
                     <tr>
-                        <th>Id_Pedido</th>
-                        <th>Id_Produto</th>
                         <th>Nome do Produto</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                     </tr>
@@ -76,16 +68,12 @@ const Pedidos = () => {
             <table className='highlight centered'>
                 <thead>
                     <tr>
-                        <th>Id_Servico</th>
-                        <th>Id_Produto</th>
                         <th>Nome do Serviço</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                     </tr>

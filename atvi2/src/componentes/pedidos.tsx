@@ -50,14 +50,10 @@ export default class Pedidos extends Component<any, props> {
                         <th>Nome</th>
                         <th>Nome Social</th>
                         <th>CPF</th>
-                        <th>RG</th>
-                        <th>CPF</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
@@ -69,16 +65,12 @@ export default class Pedidos extends Component<any, props> {
             <table className='highlight centered'>
                 <thead>
                     <tr>
-                        <th>Id_Pedido</th>
-                        <th>Id_Produto</th>
                         <th>Nome do Produto</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                     </tr>
@@ -89,16 +81,12 @@ export default class Pedidos extends Component<any, props> {
             <table className='highlight centered'>
                 <thead>
                     <tr>
-                        <th>Id_Servico</th>
-                        <th>Id_Produto</th>
                         <th>Nome do Serviço</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                     </tr>

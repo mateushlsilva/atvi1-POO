@@ -52,6 +52,26 @@ const FormularioCadastroCliente = () => {
                         </div>
                     </div>
                     <div className="row">
+                        <div className="input-field col s6">
+                            <input id="genero" type="text" className="validate" />
+                            <label htmlFor="genero">Gênero</label>
+                        </div>
+                        <div className="input-field col s6">
+                            <input id="rg" type="email" className="validate" />
+                            <label htmlFor="rg">RG</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-field col s6">
+                            <input id="ddd" type="text" className="validate" />
+                            <label htmlFor="ddd">DDD</label>
+                        </div>
+                        <div className="input-field col s6">
+                            <input id="telefone" type="email" className="validate" />
+                            <label htmlFor="telefone">Telefone</label>
+                        </div>
+                    </div>
+                    <div className="row">
                         <div className="col s12">
                             <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action">Cadastrar Cliente
                                 <i className="material-icons right">send</i>

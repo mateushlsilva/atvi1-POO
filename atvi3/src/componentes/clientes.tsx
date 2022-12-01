@@ -42,7 +42,6 @@ const Clientes = () => {
             <table className='highlight centered'>
                 <thead>
                     <tr>
-                        <th>Id_Cliente</th>
                         <th>Nome</th>
                         <th>CPF</th>
                         <th>Telofone</th>
@@ -53,53 +52,9 @@ const Clientes = () => {
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
-                        <td>...</td>
                     </tr>
                 </tbody>
             </table>
-            <br></br>
-            <h5 className="center-align">Produto</h5>
-            <table className='highlight centered'>
-                <thead>
-                    <tr>
-                        <th>Id_Pedido</th>
-                        <th>Id_Produto</th>
-                        <th>Nome do Produto</th>
-                        <th>Valor do Produto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br></br>
-            <h5 className="center-align">Serviços</h5>
-            <table className='highlight centered'>
-                <thead>
-                    <tr>
-                        <th>Id_Servico</th>
-                        <th>Id_Pedido</th>
-                        <th>Nome do Serviço</th>
-                        <th>Valor do Serviço</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            
-
             </div>
         </div>
         )

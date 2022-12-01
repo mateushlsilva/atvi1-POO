@@ -52,7 +52,6 @@ render() {
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome</th>
                                             <th>CPF</th>
                                             <th>Telefone</th>
@@ -60,7 +59,6 @@ render() {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>Cliente 1</td>
                                             <td>000.000.000.00</td>
                                             <td>(00)00000-0000</td>
@@ -78,7 +76,6 @@ render() {
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome</th>
                                             <th>CPF</th>
                                             <th>Total Consumido</th>
@@ -86,7 +83,6 @@ render() {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>Cliente 1</td>
                                             <td>000.000.000.00</td>
                                             <td>...</td>
@@ -104,7 +100,6 @@ render() {
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome</th>
                                             <th>CPF</th>
                                             <th>Total consumido</th>
@@ -112,7 +107,6 @@ render() {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>Cliente 1</td>
                                             <td>000.000.000.00</td>
                                             <td>...</td>
@@ -130,14 +124,12 @@ render() {
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome do Produto/Serviço</th>
                                             <th>Valor do Produto/Serviço</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>...</td>
                                             <td>...</td>
                                         </tr>
@@ -155,14 +147,12 @@ render() {
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome do Produto/Serviço</th>
                                             <th>Valor do Produto/Serviço</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>...</td>
                                             <td>...</td>
                                         </tr>
@@ -175,14 +165,12 @@ render() {
                                 <table className='responsive-table centered'>
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
                                             <th>Nome do Produto/Serviço</th>
                                             <th>Valor do Produto/Serviço</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
                                             <td>...</td>
                                             <td>...</td>
                                         </tr>
