@@ -103,7 +103,7 @@ export default class Pedidos extends Component<{}, table> {
                                 <td>{item.cliente}</td>
                                 <td>{item.cpf}</td>
                                 <td>{item.produto}</td>
-                                <td>{item.valor}</td>
+                                <td>R$ {item.valor}</td>
                             </tr>
                         )
                     })}
@@ -127,7 +127,7 @@ export default class Pedidos extends Component<{}, table> {
                                 <td>{item.cliente}</td>
                                 <td>{item.cpf}</td>
                                 <td>{item.produto}</td>
-                                <td>{item.valor}</td>
+                                <td>R$ {item.valor}</td>
                             </tr>
                         )
                     })}

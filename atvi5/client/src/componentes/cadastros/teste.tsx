@@ -2,7 +2,9 @@ import { Component } from "react";
 import CSS from 'csstype'
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import Produto from "../../class/ProdutoClass";
+import Servico from "../../class/ServicoClass";
+import Select from 'react-select'
+import AsyncSelect from "react-select/async";
 
 type props = {
     tema: string
@@ -20,24 +22,63 @@ const fontStyle: CSS.Properties = {
 
 type state = {
     nomeError: string,
-    valorError: string
+    valorError: string,
+    dados: any[],
+    opcao: any[]
 }
 
+  
 
-export default class FormularioCadastroProduto extends Component<any, state> {
+export default class Teste extends Component<any,state> {
     
-    private produto:Produto = new Produto('', 0)
+    private produto:Servico = new Servico('', 0)
 
     constructor(props: any){
         super(props);
         this.state = {
             nomeError: '',
-            valorError: ''
+            valorError: '',
+            dados: [],
+            opcao: []
         }
         this.nomeChange = this.nomeChange.bind(this);
         this.valorChange = this.valorChange.bind(this);
     }
     
+    componentDidMount(): void {
+        axios.get("http://localhost:3001/servico").then((res) =>{
+            let data = res.data
+            this.setState({
+                dados: data
+            })
+            this.state.dados.forEach(u => {
+                this.state.opcao.push({
+                    value: u.id,
+                    label: u.nome
+                })
+            })
+        })
+    }
+    formatGroupLabel = (data:any) => (
+        <div>
+          <span>{data.label}</span>
+          <span >{data.options.length}</span>
+        </div>
+      );
+    // {this.state.dados.map((user) => {})}
+    
+    // options = [
+    //     this.state.dados.map(user => {
+    //         { value: user.id, label: user.nome }
+    //     })
+    //     // { value: 'chocolate', label: 'Chocolate' },
+    //     // { value: 'strawberry', label: 'Strawberry' },
+    //     // { value: 'vanilla', label: 'Vanilla' }
+    //   ]
+      
+    // MyComponent = () => (
+    //     <Select options={this.options} />
+    // )
     eventoFormulario = (evento: any) => {
         evento.preventDefault()
     }
@@ -94,7 +135,7 @@ export default class FormularioCadastroProduto extends Component<any, state> {
         const isValid = this.validate();
         if (isValid) {
             let res = -1
-            await axios.post("http://localhost:3001/produto/cadastrar", {
+            await axios.post("http://localhost:3001/servico/cadastrar", {
                 nome: this.produto.getNome,
                 preco: Number(this.produto.getValor.toString().replace(',', '.')).toFixed(2)
             }).then((response) => {
@@ -116,8 +157,8 @@ export default class FormularioCadastroProduto extends Component<any, state> {
         }
     }
 
+
     render() {
-        let estiloBotao = `btn waves-effect waves-light ${this.props.tema}`
         return (
             <div>
             <>
@@ -133,21 +174,42 @@ export default class FormularioCadastroProduto extends Component<any, state> {
                 </div>
                 </nav>
             </>
+
             <br/>
             <div className='container'>
             <div className="row">
-                <form className="col s12" onSubmit={this.eventoFormulario} id="form">
+                <form className="col s12">
+                        {/* <select className="browser-default">
+                            <option value="" disabled selected>Choose your option</option>
+                            {this.state.dados.map((user) => {
+                                <option key={user.id} value={user.id}>{user.nome}</option>
+                            })}
+                        </select>  */}
+                            
+                            <Select
+                                options={this.state.opcao}
+                            />
+                            {/* <Select options={options} /> */}
+                        
+                            {/* <AsyncSelect
+                                value={this.state.dados}
+                                placeholder="Admin Name"
+                                // onChange={(e) => {
+                                // this.onSearchChange(e);
+                                // }}
+                                defaultOptions={true}
+                            /> */}
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="nome_produto" type="text" onChange={this.nomeChange}  className="validate" />
-                            <label htmlFor="nome_produto">Nome</label>
+                            <input id="nome_servico" type="text" className="validate" onChange={this.nomeChange} />
+                            <label htmlFor="nome_servico">Nome</label>
                             <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.nomeError}
                             </div>
                         </div>
                         <div className="input-field col s6">
-                            <input id="valor" type="number" onChange={this.valorChange}  className="validate" />
-                            <label htmlFor="valor">Preço</label>
+                            <input id="valor_servico" type="text" className="validate" onChange={this.valorChange} />
+                            <label htmlFor="valor_servico">Preço</label>
                             <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.valorError}
                             </div>
@@ -155,7 +217,7 @@ export default class FormularioCadastroProduto extends Component<any, state> {
                     </div>
                     <div className="row">
                         <div className="col s12">
-                            <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Cadastrar Produto
+                            <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Cadastrar Serviço
                                 <i className="material-icons right">send</i>
                             </button>
                         </div>

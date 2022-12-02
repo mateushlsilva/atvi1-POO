@@ -20,32 +20,45 @@ const fontStyle: CSS.Properties = {
 
 type state = {
     nomeError: string,
-    valorError: string
+    valorError: string,
+    dados: any[],
+    produto: Produto
 }
 
 
-export default class FormularioCadastroProduto extends Component<any, state> {
-    
-    private produto:Produto = new Produto('', 0)
-
+export default class FormularioAtulizaProduto extends Component<any, state> {
     constructor(props: any){
         super(props);
         this.state = {
             nomeError: '',
-            valorError: ''
+            valorError: '',
+            dados: [],
+            produto: new Produto('', 0)
         }
         this.nomeChange = this.nomeChange.bind(this);
         this.valorChange = this.valorChange.bind(this);
     }
     
+    componentDidMount(): void {
+        axios.get('http://localhost:3001/produto/' + this.props.taskId).then((response) => {
+            let dadosBD = response.data
+            this.setState({
+                dados: dadosBD,
+                produto: new Produto(dadosBD.nome, dadosBD.preco)
+            }) 
+        }).catch((res) => {
+            console.log("teste");
+        })
+    }
+
     eventoFormulario = (evento: any) => {
         evento.preventDefault()
     }
     nomeChange(event: any) {
         let nomeError;
         const target = event.target;
-        this.produto.setNome = target.value;
-        if (!this.produto.getNome) {
+        this.state.produto.setNome = target.value;
+        if (!this.state.produto.getNome) {
             nomeError = "O nome é obrigatório!";
         } else {
             nomeError = ""
@@ -55,8 +68,8 @@ export default class FormularioCadastroProduto extends Component<any, state> {
     valorChange(event:any) {
         let valorError;
         const target = event.target;
-        this.produto.setValor = target.value;
-        if (!this.produto.getValor) {
+        this.state.produto.setValor = target.value;
+        if (!this.state.produto.getValor) {
             valorError = "O preço é obrigatório!";
         } else {
             valorError = ""
@@ -69,12 +82,12 @@ export default class FormularioCadastroProduto extends Component<any, state> {
         let nomeError = "";
         let valorError = "";
 
-        if (!this.produto.getNome) {
+        if (!this.state.produto.getNome) {
             nomeError = "O nome é obrigatório!"
         } else {
             nomeError = ""
         }
-        if (!this.produto.getValor) {
+        if (!this.state.produto.getValor) {
             valorError = "O preço é obrigatório!";
         } else {
             valorError = ""
@@ -94,9 +107,9 @@ export default class FormularioCadastroProduto extends Component<any, state> {
         const isValid = this.validate();
         if (isValid) {
             let res = -1
-            await axios.post("http://localhost:3001/produto/cadastrar", {
-                nome: this.produto.getNome,
-                preco: Number(this.produto.getValor.toString().replace(',', '.')).toFixed(2)
+            await axios.put("http://localhost:3001/produto/modificar/" + this.props.taskId, {
+                nome: this.state.produto.getNome,
+                preco: Number(this.state.produto.getValor.toString().replace(',', '.')).toFixed(2)
             }).then((response) => {
                 console.log('foi');
                 
@@ -106,12 +119,12 @@ export default class FormularioCadastroProduto extends Component<any, state> {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Cadastrado Com Sucesso',
+                title: 'Atualização Completa',
                 showConfirmButton: false,
                 timer: 1500
             })
             setTimeout(function () {
-                 window.location.href = "/Home"
+                 window.location.href = "/produtos"
             }, 1500);
         }
     }
@@ -139,15 +152,15 @@ export default class FormularioCadastroProduto extends Component<any, state> {
                 <form className="col s12" onSubmit={this.eventoFormulario} id="form">
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="nome_produto" type="text" onChange={this.nomeChange}  className="validate" />
-                            <label htmlFor="nome_produto">Nome</label>
+                            <h6>Nome</h6>
+                            <input id="nome_produto" type="text" onChange={this.nomeChange}  className="validate" value={this.state.produto.getNome} />
                             <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.nomeError}
                             </div>
                         </div>
                         <div className="input-field col s6">
-                            <input id="valor" type="number" onChange={this.valorChange}  className="validate" />
-                            <label htmlFor="valor">Preço</label>
+                            <h6>Preço</h6>
+                            <input id="valor" type="number" onChange={this.valorChange}  className="validate" value={this.state.produto.getValor} />
                             <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.valorError}
                             </div>
@@ -155,7 +168,7 @@ export default class FormularioCadastroProduto extends Component<any, state> {
                     </div>
                     <div className="row">
                         <div className="col s12">
-                            <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Cadastrar Produto
+                            <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Atualização Produto
                                 <i className="material-icons right">send</i>
                             </button>
                         </div>

@@ -1,5 +1,8 @@
 import { Component } from "react";
 import CSS from 'csstype'
+import axios from 'axios';
+import Swal from 'sweetalert2'
+import Servico from "../../class/ServicoClass";
 
 type props = {
     tema: string
@@ -14,8 +17,104 @@ const fontStyle: CSS.Properties = {
     fontSize:'xx-large',
     fontFamily: 'fantasy',
 }
-export default class FormularioCadastroServico extends Component<any,props> {
+
+type state = {
+    nomeError: string,
+    valorError: string
+}
+export default class FormularioCadastroServico extends Component<any,state> {
     
+    private produto:Servico = new Servico('', 0)
+
+    constructor(props: any){
+        super(props);
+        this.state = {
+            nomeError: '',
+            valorError: ''
+        }
+        this.nomeChange = this.nomeChange.bind(this);
+        this.valorChange = this.valorChange.bind(this);
+    }
+    
+    eventoFormulario = (evento: any) => {
+        evento.preventDefault()
+    }
+    nomeChange(event: any) {
+        let nomeError;
+        const target = event.target;
+        this.produto.setNome = target.value;
+        if (!this.produto.getNome) {
+            nomeError = "O nome é obrigatório!";
+        } else {
+            nomeError = ""
+        }
+        this.setState({ nomeError: nomeError })
+    }
+    valorChange(event:any) {
+        let valorError;
+        const target = event.target;
+        this.produto.setValor = target.value;
+        if (!this.produto.getValor) {
+            valorError = "O preço é obrigatório!";
+        } else {
+            valorError = ""
+        }
+        this.setState({ valorError: valorError })
+    }
+
+
+    validate = () => {
+        let nomeError = "";
+        let valorError = "";
+
+        if (!this.produto.getNome) {
+            nomeError = "O nome é obrigatório!"
+        } else {
+            nomeError = ""
+        }
+        if (!this.produto.getValor) {
+            valorError = "O preço é obrigatório!";
+        } else {
+            valorError = ""
+        }
+
+        this.setState({
+           nomeError: nomeError, valorError: valorError
+        });
+        if (nomeError || valorError ) {
+            return false
+        }
+        return true;
+    }
+
+    postClickButton = async (event: any) => {
+        event.preventDefault();
+        const isValid = this.validate();
+        if (isValid) {
+            let res = -1
+            await axios.post("http://localhost:3001/servico/cadastrar", {
+                nome: this.produto.getNome,
+                preco: Number(this.produto.getValor.toString().replace(',', '.')).toFixed(2)
+            }).then((response) => {
+                console.log('foi');
+                
+            }).catch((res) => {
+                console.log("teste");
+            })
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Cadastrado Com Sucesso',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(function () {
+                 window.location.href = "/Home"
+            }, 1500);
+        }
+    }
+
+
     render() {
         return (
             <div>
@@ -38,23 +137,23 @@ export default class FormularioCadastroServico extends Component<any,props> {
                 <form className="col s12">
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="nome_servico" type="text" className="validate" />
-                            <label htmlFor="nome_servico">Nome do Serviços</label>
+                            <input id="nome_servico" type="text" className="validate" onChange={this.nomeChange} />
+                            <label htmlFor="nome_servico">Nome</label>
+                            <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.nomeError}
+                            </div>
                         </div>
                         <div className="input-field col s6">
-                            <input id="valor_servico" type="text" className="validate" />
-                            <label htmlFor="valor_servico">Valor do Serviço</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <input id="Descricao_servico" type="text" className="validate" />
-                            <label htmlFor="Descricao_servico">Descrição do serviço</label>
+                            <input id="valor_servico" type="text" className="validate" onChange={this.valorChange} />
+                            <label htmlFor="valor_servico">Preço</label>
+                            <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.valorError}
+                            </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col s12">
-                            <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action">Cadastrar Serviço
+                            <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Cadastrar Serviço
                                 <i className="material-icons right">send</i>
                             </button>
                         </div>

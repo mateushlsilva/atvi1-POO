@@ -4,6 +4,7 @@ import editar from '../../Icons/editar.png'
 import excluir from '../../Icons/excluir.png'
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 type props = {
     tema: string
@@ -42,6 +43,8 @@ export default class Produtos extends Component<{}, table> {
             preco: 0,
             result: []
         }
+        this.onClickEdit = this.onClickEdit.bind(this)
+        this.onClickDelete = this.onClickDelete.bind(this)
     }
     componentDidMount(): void {
         axios.get('http://localhost:3001/produto').then(res => {
@@ -54,6 +57,65 @@ export default class Produtos extends Component<{}, table> {
             
         })
     }
+
+    onClickEdit(event:any) {
+        let id = event.target.id
+    }
+    onClickDelete(event:any) {
+        let id = event.target.id
+        console.log(id);
+        
+        Swal.fire({
+            title: 'Deletar Produto',
+            text: "Você deseja deleter o produto?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim'
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+                let deleteUserProd = await this.deleteUserProduto(id)
+                let deleted = await this.deleteProduto(id)
+                if(deleted || deleteUserProd){
+                    Swal.fire(
+                        'Deletado!',
+                        'O produto foi deletado.',
+                        'success'
+                        )
+                }else{
+                    Swal.fire(
+                        'Error!',
+                        'O ocorreu um erro!',
+                        'error'
+                        )  
+                }
+                setTimeout(function() {
+                    window.location.reload();
+                  }, 1000);
+            }
+          })
+    }
+
+    public async deleteProduto(id:number): Promise<boolean>  {
+        let retorno = false
+        await axios.delete('http://localhost:3001/produto/deletar/' + id).then(response => {
+            retorno = !response.data.erro
+        })       
+        return retorno
+    }
+
+    public async deleteUserProduto(id:number): Promise<boolean>  {
+        let retorno = false
+        await axios.delete('http://localhost:3001/usuarioProduto/deletar/' + id).then(response => {
+            retorno = !response.data.erro
+        }).catch(er => {
+            console.log('jghghg');
+            
+        })       
+        return retorno
+    }
+
     render() {
         return (
             <div>
@@ -86,12 +148,12 @@ export default class Produtos extends Component<{}, table> {
                         return(
                         <tr key={item.id}>
                             <td>{ item.nome }</td>
-                            <td>{ item.preco }</td>
+                            <td>R$ { item.preco }</td>
                             <td>
-                                <Link to="/formularioCadastroProduto">
+                                <Link to={"/atualizaProduto/" + item.id}>
                                     <img src={editar}  style={ImagemStyle}  />
                                 </Link>
-                                <img src={excluir} style={ImagemStyle}/>
+                                <img src={excluir} style={ImagemStyle} onClick={this.onClickDelete} id={item.id}/>
                             </td>
                         </tr>
                     )})}
