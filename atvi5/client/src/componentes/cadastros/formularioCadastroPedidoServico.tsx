@@ -28,16 +28,16 @@ type table = {
     nome: string,
     preco: number
     cli: any[],
-    pro: any[],
-    pr: any[],
+    ser: any[],
+    se: any[],
     opcao: any[],
     nomeError: string,
-    perError: string
+    serError: string
 }
 
-export default class FormularioCadastroPedido extends Component<{}, table> {
+export default class FormularioCadastroServico extends Component<{}, table> {
     private cliSelected!: number;
-    private proSelected!: number;
+    private serSelected!: number;
 
     constructor(props: any){
         super(props);
@@ -46,14 +46,14 @@ export default class FormularioCadastroPedido extends Component<{}, table> {
             nome: '',
             preco: 0,
             cli: [],
-            pro: [],
-            pr: [],
+            ser: [],
+            se: [],
             opcao: [],
             nomeError: '',
-            perError: ''
+            serError: ''
         }
         this.cliChange = this.cliChange.bind(this);
-        this.proChange = this.proChange.bind(this);
+        this.serChange = this.serChange.bind(this);
     }
     componentDidMount() {
         document.addEventListener('DOMContentLoaded', function () {
@@ -75,22 +75,21 @@ export default class FormularioCadastroPedido extends Component<{}, table> {
             console.log('fasf');
             
         })
-        axios.get('http://localhost:3001/produto').then(res => {
+        axios.get('http://localhost:3001/servico').then(res => {
             let dados = res.data
             this.setState({
-                pr: dados
-            })
-            this.state.pr.forEach(prod => {
-                this.state.pro.push({
-                    value: prod.id,
-                    label: prod.nome
+                se: dados
+            }) 
+            this.state.se.forEach(se => {
+                this.state.ser.push({
+                    value: se.id,
+                    label: se.nome
                 })
-            })   
+            })  
         }).catch(err => {
             console.log('fasf');
             
         })
-        
     }
 
     eventoFormulario = (evento: any) => {
@@ -105,23 +104,23 @@ export default class FormularioCadastroPedido extends Component<{}, table> {
             this.setState({ nomeError: "" })
         }
         console.log(this.cliSelected);
+        
     }
-    proChange(event: any) {
-        let nomeError;
+    serChange(event: any) {
+        let serError;
         const target = event.value;
         if (target == -1) return
-        this.proSelected = target;
-        console.log(this.proSelected);
-        if (this.state.perError.includes("Select")) {
-            this.setState({ perError: "" })
+        this.serSelected = target;
+        if (this.state.serError.includes("Select")) {
+            this.setState({ serError: "" })
         }
-        console.log(this.proSelected);
+        console.log(this.serSelected);
+        
     }
-    
 
     validate = () => {
         let nomeError = "";
-        let perError = "";
+        let serError = "";
         if (!this.cliSelected) {
             nomeError = "O cliente é obrigatório!"
         } else {
@@ -133,21 +132,21 @@ export default class FormularioCadastroPedido extends Component<{}, table> {
         if (nomeError) {
             return false
         }
-        if (!this.proSelected) {
-            perError = "O Produto é obrigatório!"
+        if (!this.serSelected) {
+            serError = "O serviço é obrigatório!"
         } else {
-            perError = ""
+            serError = ""
         }
         this.setState({
-            perError: perError
+           serError: serError
         });
-        if (perError) {
+        if (serError) {
             return false
         }
         this.setState({
-            nomeError: nomeError, perError: perError
+            nomeError: nomeError, serError: serError
           });
-        if (nomeError || perError) {
+        if (nomeError || serError) {
             return false;
         }
         return true;
@@ -158,9 +157,9 @@ export default class FormularioCadastroPedido extends Component<{}, table> {
         const isValid = this.validate();
         if (isValid) {
             let res = -1
-            await axios.post("http://localhost:3001/usuarioProduto/cadastrar", {
+            await axios.post("http://localhost:3001/usuarioServico/cadastrar", {
                 userId: this.cliSelected,
-                produtoId: this.proSelected
+                servicoId: this.serSelected
             }).then((response) => {
                 console.log('foi');
                 
@@ -211,13 +210,13 @@ export default class FormularioCadastroPedido extends Component<{}, table> {
                     </div>
                 </div>
                 <div style={marginDiv}>
-                    <h5>Produtos</h5>
+                    <h5>Serviços</h5>
                     <Select
-                        onChange={this.proChange}
-                        options={this.state.pro}
+                        onChange={this.serChange}
+                        options={this.state.ser}
                     />
                     <div style={{ fontSize: 12, color: "red" }}>
-                        {this.state.perError}
+                        {this.state.serError}
                     </div>
                 </div>
                 <div className="row">

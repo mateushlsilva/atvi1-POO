@@ -31,10 +31,13 @@ type state = {
     cpfError: string,
     rgError: string,
     dddError: string,
-    telefoneError: string
+    telefoneError: string,
+    cli: any[],
+    opcao: any[],
+    cliente: Cliente
 }
 
-export default class FormularioCadastroCliente extends Component<any,state> {
+export default class FormularioAtualizaCliente extends Component<any,state> {
 
     private cliente:Cliente = new Cliente('', '','',0,'',0,0)
     private generoSelected!: string;
@@ -48,7 +51,10 @@ export default class FormularioCadastroCliente extends Component<any,state> {
             cpfError: '',
             rgError: '',
             dddError: '',
-            telefoneError: ''
+            telefoneError: '',
+            cli: [],
+            opcao: [],
+            cliente: new Cliente('', '', '', 0,'',0,0)
         }
         this.nomeChange = this.nomeChange.bind(this);
         this.nomeSocialChange = this.nomeSocialChange.bind(this);
@@ -58,6 +64,29 @@ export default class FormularioCadastroCliente extends Component<any,state> {
         this.dddChange = this.dddChange.bind(this);
         this.telefoneChange = this.telefoneChange.bind(this);
     }
+
+    componentDidMount() {
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems);
+        });
+        axios.get('http://localhost:3001/users/id/' + this.props.taskId).then(res => {
+            let dados = res.data
+            this.setState({
+                cli: dados,
+                cliente: new Cliente(dados.name, dados.nameSocial, dados.genero, dados.cpf, dados.rg, dados.ddd, dados.telefone)
+            })   
+            this.state.cli.forEach(u => {
+                this.state.opcao.push({
+                    value: u.id,
+                    label: u.genero
+                })
+            })
+        }).catch(err => {
+            console.log('fasf');
+            
+        })
+    }
     
     eventoFormulario = (evento: any) => {
         evento.preventDefault()
@@ -65,8 +94,8 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     nomeChange(event: any) {
         let nomeError;
         const target = event.target;
-        this.cliente.setNome = target.value;
-        if (!this.cliente.getNome) {
+        this.state.cliente.setNome = target.value;
+        if (!this.state.cliente.getNome) {
             nomeError = "O nome é obrigatório!";
         } else {
             nomeError = ""
@@ -76,8 +105,8 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     nomeSocialChange(event:any) {
         let nomeSocialError;
         const target = event.target;
-        this.cliente.setNomeSocial = target.value;
-        if (!this.cliente.getNomeSocial) {
+        this.state.cliente.setNomeSocial = target.value;
+        if (!this.state.cliente.getNomeSocial) {
             nomeSocialError = "O Nome Social é obrigatório!";
         } else {
             nomeSocialError = ""
@@ -87,7 +116,7 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     generoChange(event: any) {
         let generoError;
         const target = event.value;
-        this.cliente.setGenero = target;
+        this.state.cliente.setGenero = target;
         if (target == -1) return
         this.generoSelected = target;
         if (this.state.generoError.includes("Select")) {
@@ -98,13 +127,13 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     cpfChange(event:any) {
         let cpfError;
         const target = event.target;
-        this.cliente.setCpf = target.value;
-        if (!this.cliente.getCpf) {
+        this.state.cliente.setCpf = target.value;
+        if (!this.state.cliente.getCpf) {
             cpfError = "O CPF é obrigatório!";
         } else {
             cpfError = ""
         }
-        if(this.cliente.getCpf.toString().length != 11){
+        if(this.state.cliente.getCpf.toString().length != 11){
             cpfError = "O CPF deve ter 11 digitos!"
         }else{
             cpfError = ""
@@ -114,8 +143,8 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     rgChange(event: any) {
         let rgError;
         const target = event.target;
-        this.cliente.setRg = target.value;
-        if (!this.cliente.getRg) {
+        this.state.cliente.setRg = target.value;
+        if (!this.state.cliente.getRg) {
             rgError = "O RG é obrigatório!";
         } else {
             rgError = ""
@@ -125,8 +154,8 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     dddChange(event:any) {
         let dddError;
         const target = event.target;
-        this.cliente.setDdd = target.value;
-        if (!this.cliente.getDdd) {
+        this.state.cliente.setDdd = target.value;
+        if (!this.state.cliente.getDdd) {
             dddError = "O DDD é obrigatório!";
         } else {
             dddError = ""
@@ -136,8 +165,8 @@ export default class FormularioCadastroCliente extends Component<any,state> {
     telefoneChange(event: any) {
         let telefoneError;
         const target = event.target;
-        this.cliente.setTelefone = target.value;
-        if (!this.cliente.getTelefone) {
+        this.state.cliente.setTelefone = target.value;
+        if (!this.state.cliente.getTelefone) {
             telefoneError = "O Telefone é obrigatório!";
         } else {
             telefoneError = ""
@@ -154,12 +183,12 @@ export default class FormularioCadastroCliente extends Component<any,state> {
         let dddError = ""
         let telefoneError = ""
 
-        if (!this.cliente.getNome) {
+        if (!this.state.cliente.getNome) {
             nomeError = "O nome é obrigatório!"
         } else {
             nomeError = ""
         }
-        if (!this.cliente.getNomeSocial) {
+        if (!this.state.cliente.getNomeSocial) {
             nomeSocialError = "O Nome Social é obrigatório!";
         } else {
             nomeSocialError = ""
@@ -176,27 +205,27 @@ export default class FormularioCadastroCliente extends Component<any,state> {
         if (generoError) {
             return false
         }
-        if (!this.cliente.getCpf) {
+        if (!this.state.cliente.getCpf) {
            cpfError = "O CPF é obrigatório!";
         }else {
             cpfError = ""
         }
-        if(this.cliente.getCpf.toString().length != 11){
+        if(this.state.cliente.getCpf.toString().length != 11){
             cpfError = "O CPF deve ter 11 digitos!"
         }else{
             cpfError = ""
         }
-        if (!this.cliente.getRg) {
+        if (!this.state.cliente.getRg) {
             rgError = "O RG é obrigatório!"
         } else {
             rgError = ""
         }
-        if (!this.cliente.getDdd) {
+        if (!this.state.cliente.getDdd) {
             dddError = "O DDD é obrigatório!";
         } else {
             dddError = ""
         }
-        if (!this.cliente.getTelefone) {
+        if (!this.state.cliente.getTelefone) {
             telefoneError = "O Telefone é obrigatório!";
         } else {
             telefoneError = ""
@@ -217,14 +246,14 @@ export default class FormularioCadastroCliente extends Component<any,state> {
         if (isValid) {
             let res = -1
             
-            await axios.post("http://localhost:3001/users/cadastrar", {
-                name: this.cliente.getNome,
-                nameSocial: this.cliente.getNomeSocial,
+            await axios.put("http://localhost:3001/users/modificar/" + this.props.taskId, {
+                name: this.state.cliente.getNome,
+                nameSocial: this.state.cliente.getNomeSocial,
                 genero: this.generoSelected,
-                cpf: this.cliente.getCpf,
-                ddd: this.cliente.getDdd,
-                telefone: this.cliente.getTelefone,
-                rg: this.cliente.getRg
+                cpf: this.state.cliente.getCpf,
+                ddd: this.state.cliente.getDdd,
+                telefone: this.state.cliente.getTelefone,
+                rg: this.state.cliente.getRg
             }).then((response) => {
                 console.log('foi');
             }).catch((res) => {
@@ -239,7 +268,7 @@ export default class FormularioCadastroCliente extends Component<any,state> {
                 timer: 1500
             })
             setTimeout(function () {
-                window.location.href = "/Home"
+                window.location.href = "/clientes"
             }, 1500);
         }
     }
@@ -264,18 +293,18 @@ export default class FormularioCadastroCliente extends Component<any,state> {
                 <br/>
                 <div className='container'>
                     <div className="row">
-                        <form className="col s12">
+                        <form className="col s12" onSubmit={this.eventoFormulario} id="form">
                             <div className="row">
                                 <div className="input-field col s6">
-                                    <input id="nome_cliente" type="text" className="validate" onChange={this.nomeChange} />
-                                    <label htmlFor="nome_cliente">Nome</label>
+                                    <h6>Nome</h6>
+                                    <input id="nome_cliente" type="text" className="validate" onChange={this.nomeChange} value={this.state.cliente.getNome}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.nomeError}
                                     </div>
                                 </div>
                                 <div className="input-field col s6">
-                                    <input id="nome_social" type="text" className="validate" onChange={this.nomeSocialChange}/>
-                                    <label htmlFor="nome_social">Nome social</label>
+                                    <h6>Nome social</h6>
+                                    <input id="nome_social" type="text" className="validate" onChange={this.nomeSocialChange} value={this.state.cliente.getNomeSocial}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.nomeSocialError}
                                     </div>
@@ -283,15 +312,15 @@ export default class FormularioCadastroCliente extends Component<any,state> {
                             </div>
                             <div className="row">
                                 <div className="input-field col s6">
-                                    <input id="cpf" type="number" className="validate" onChange={this.cpfChange}/>
-                                    <label htmlFor="cpf">CPF</label>
+                                    <h6>CPF</h6>
+                                    <input id="cpf" type="number" className="validate" onChange={this.cpfChange} value={this.state.cliente.getCpf}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.cpfError}
                                     </div>
                                 </div>
                                 <div className="input-field col s6">
-                                    <input id="rg" type="text" className="validate" onChange={this.rgChange}/>
-                                    <label htmlFor="rg">RG</label>
+                                    <h6>RG</h6>
+                                    <input id="rg" type="text" className="validate" onChange={this.rgChange} value={this.state.cliente.getRg}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.rgError}
                                     </div>
@@ -300,6 +329,7 @@ export default class FormularioCadastroCliente extends Component<any,state> {
                             <div>
                                 <Select
                                     onChange={this.generoChange}
+                                    // options={this.state.opcao}
                                     options={genero}
                                 />
                                 <div style={{ fontSize: 12, color: "red" }}>
@@ -308,15 +338,15 @@ export default class FormularioCadastroCliente extends Component<any,state> {
                             </div>
                             <div className="row">
                                 <div className="input-field col s6">
-                                    <input id="ddd" type="number" className="validate" onChange={this.dddChange}/>
-                                    <label htmlFor="ddd">DDD</label>
+                                    <h6>DDD</h6>
+                                    <input id="ddd" type="number" className="validate" onChange={this.dddChange} value={this.state.cliente.getDdd}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.dddError}
                                     </div>
                                 </div>
                                 <div className="input-field col s6">
-                                    <input id="telefone" type="number" className="validate" onChange={this.telefoneChange}/>
-                                    <label htmlFor="telefone">Telefone</label>
+                                    <h6>Telefone</h6>
+                                    <input id="telefone" type="number" className="validate" onChange={this.telefoneChange} value={this.state.cliente.getTelefone}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.telefoneError}
                                     </div>

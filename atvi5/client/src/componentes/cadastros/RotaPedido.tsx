@@ -19,7 +19,7 @@ const botaoStyle: CSS.Properties = {
     padding: '10px'
 }
 
-class Home extends Component<any, props> {
+class RotaPedido extends Component<any, props> {
     render() {
         return (
             <div>
@@ -40,15 +40,12 @@ class Home extends Component<any, props> {
                 <div className='container'>
                     <div className="center-align">
                         <div className="card">
-                            <span className="card-title">Cadastros</span>
+                            <span className="card-title">Pedidos</span>
                             <div className="card-content">
-                                <a className="waves-effect waves-light btn" style={backgroundColor} href="/formularioCadastroCliente">Cadastrar clientes</a>
+                                <a className="waves-effect waves-light btn" style={backgroundColor} href="/formularioCadastroPedido">Cadastrar Pedido Produto</a>
                                 <a className="col s4"> </a>
-                                <a className="waves-effect waves-light btn" style={backgroundColor} href="/formularioCadastroProduto">Cadastrar produtos</a>
+                                <a className="waves-effect waves-light btn" style={backgroundColor} href="/formularioCadastroPedidoServico">Cadastrar Pedido Serviço</a>
                                 <a className="col s4"> </a>
-                                <a className="waves-effect waves-light btn" style={backgroundColor} href="/formularioCadastroServico">Cadastrar Servico</a>
-                                <a className="col s4"> </a>
-                                <a className="waves-effect waves-light btn" style={backgroundColor} href="/rotaPedido">Cadastrar Pedidos</a>
                             </div>
                         </div>
                     </div>
@@ -59,4 +56,4 @@ class Home extends Component<any, props> {
         )
     }
 }
-export default Home;
+export default RotaPedido;
