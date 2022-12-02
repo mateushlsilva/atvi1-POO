@@ -47,7 +47,6 @@ export default class Clientes extends Component<any, props> {
             <table className='highlight centered'>
                 <thead>
                     <tr>
-                        <th>Id_Cliente</th>
                         <th>Nome</th>
                         <th>CPF</th>
                         <th>Telofone</th>
@@ -55,7 +54,6 @@ export default class Clientes extends Component<any, props> {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
