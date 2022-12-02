@@ -43,17 +43,17 @@ const FormularioCadastroCliente = () => {
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="cpf" type="email" className="validate" />
+                            <input id="cpf" type="text" className="validate" />
                             <label htmlFor="cpf">CPF</label>
                         </div>
                         <div className="input-field col s6">
-                            <input id="rg" type="email" className="validate" />
+                            <input id="rg" type="text" className="validate" />
                             <label htmlFor="rg">RG</label>
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s12">
-                            <input id="genero" type="email" className="validate" />
+                            <input id="genero" type="text" className="validate" />
                             <label htmlFor="genero">Gênero</label>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ const FormularioCadastroCliente = () => {
                             <label htmlFor="ddd">DDD</label>
                         </div>
                         <div className="input-field col s6">
-                            <input id="telefone" type="email" className="validate" />
+                            <input id="telefone" type="text" className="validate" />
                             <label htmlFor="telefone">Telefone</label>
                         </div>
                     </div>
