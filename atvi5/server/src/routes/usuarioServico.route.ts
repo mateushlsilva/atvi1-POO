@@ -160,6 +160,7 @@ usuarioServicoRoute.get('/usuarioServico/ClienteConsumoValor', async(req: Reques
             if(user.id == cli.nome){
                 serv.push({
                     nome: user.name,
+                    cpf: user.cpf,
                     valor: cli.consumo
                 })
             }
@@ -172,10 +173,12 @@ usuarioServicoRoute.get('/usuarioServico/ClienteConsumoValor', async(req: Reques
 
 usuarioServicoRoute.get('/usuarioServico/listagemServicoMaisConsumido', async(req: Request, res: Response, next: NextFunction)=>{
     let servico:any = []
+    let ser:any = []
     let cont = 0
     let n1 = 0
     let n = 0
     const usuarioServicoList = await usuarioServico.findAll({ attributes: ['servicoId'] });
+    const servicoList = await tabelaServico.findAll()
     usuarioServicoList.forEach(serv => {
         n = serv.servicoId
         if(n != n1){
@@ -196,15 +199,53 @@ usuarioServicoRoute.get('/usuarioServico/listagemServicoMaisConsumido', async(re
         servicoId: n,
         consumo: cont
     })
-    res.status(StatusCodes.OK).send(servico)
+    servicoList.forEach(usu => {
+        servico.forEach(s => {
+            if(usu.id == s.servicoId){
+                ser.push({
+                    nome: usu.nome,
+                    consumo: s.consumo
+                })
+            }
+        })
+    })
+    res.status(StatusCodes.OK).send(ser)
 })
+
+
+usuarioServicoRoute.get('/usuarioServico/listagemServicoPedidos', async(req: Request, res: Response, next: NextFunction)=>{
+    let produtoMP:any = []
+    const usuarioProdutoList = await usuarioServico.findAll();
+    const servicoList = await tabelaServico.findAll()
+    const usuarioList = await tabelaUsuario.findAll()
+    usuarioProdutoList.forEach(prod => {
+        usuarioList.forEach(user => {
+            if(prod.userId == user.id ){
+                servicoList.forEach(s => {
+                    if(s.id == prod.servicoId){
+                        produtoMP.push({
+                            cliente: user.name,
+                            cpf: user.cpf,
+                            produto: s.nome,
+                            valor: s.preco
+                        })
+                    }
+                })
+            }
+        })
+    });
+    res.status(StatusCodes.OK).send(produtoMP)
+})
+
 
 usuarioServicoRoute.get('/usuarioServico/listagemClienteServicoConsumidoQuantidade', async(req: Request, res: Response, next: NextFunction)=>{
     let userMP:any = []
+    let userP:any = []
     let cont = 0
     let n1 = 0
     let n = 0
     const usuarioServicoList = await usuarioServico.findAll({ attributes: ['userId'] });
+    const tabelaUsu = await tabelaUsuario.findAll();
     usuarioServicoList.forEach(user => {
         n = user.userId
         
@@ -227,7 +268,19 @@ usuarioServicoRoute.get('/usuarioServico/listagemClienteServicoConsumidoQuantida
         userId: n,
         consumo: cont
     })
-    res.status(StatusCodes.OK).send(userMP)
+
+    tabelaUsu.forEach(usu => {
+        userMP.forEach(cli => {
+            if(usu.id == cli.userId){
+                userP.push({
+                    nome: usu.name,
+                    cpf: usu.cpf,
+                    consumo: cli.consumo
+                })
+            }
+        })
+    })
+    res.status(StatusCodes.OK).send(userP)
 })
 
 usuarioServicoRoute.get('/usuarioServico/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
