@@ -27,6 +27,8 @@ produtoRoute.get('/produto/:uuid', async(req: Request<{ uuid: string }>, res: Re
 
 produtoRoute.post('/produto/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newproduto = req.body
+    const nome = req.body.nome
+    newproduto.nome = nome[0].toUpperCase() + nome.slice(1,nome.length).toLowerCase()
     await produto.create(newproduto)
     .then((test) =>{
         console.log(test)
@@ -49,6 +51,8 @@ produtoRoute.put('/produto/modificar/:uuid', async(req: Request<{ uuid: string }
     const uuid = req.params.uuid;
     const modifiedproduto = req.body;
     modifiedproduto.uuid = uuid
+    const nome = req.body.nome
+    modifiedproduto.nome = nome[0].toUpperCase() + nome.slice(1,nome.length).toLowerCase()
     await produto.update(modifiedproduto, {
         where: {
             id: uuid

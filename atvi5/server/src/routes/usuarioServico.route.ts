@@ -133,7 +133,7 @@ usuarioServicoRoute.get('/usuarioServico/ClienteConsumoValor', async(req: Reques
                     consumo: s
                 })
             }
-            s = v
+            s = Number(v)
             n1 = n
             cont = 1
             c++
@@ -141,9 +141,9 @@ usuarioServicoRoute.get('/usuarioServico/ClienteConsumoValor', async(req: Reques
         else{
             v1 = v
             if(serv.length >= c){
-                s = s + v
+                s = Number(s) + Number(v)
             }else{
-                s = v + v1
+                s = Number(v) + Number(v1)
             }
             cont++
             c++
@@ -344,7 +344,27 @@ usuarioServicoRoute.delete('/usuarioServico/deletar/:uuid', async(req: Request<{
     const uuid = req.params.uuid;
     await usuarioServico.destroy({
         where: {
-            id: uuid
+            servicoId: uuid
+          }
+    })
+    .then(() =>{
+        return res.json({
+            erro: false,
+            mensagem: "usuarioServico deletado com sucesso!"
+        })
+    }).catch(() =>{
+        return res.status(StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "usuarioServico não deletado!"
+        })
+    })
+})
+
+usuarioServicoRoute.delete('/usuarioServico/deletar/usu/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
+    const uuid = req.params.uuid;
+    await usuarioServico.destroy({
+        where: {
+            userId: uuid
           }
     })
     .then(() =>{

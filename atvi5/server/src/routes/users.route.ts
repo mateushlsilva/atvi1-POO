@@ -52,6 +52,10 @@ usersRoute.get('/users/id/:uuid', async(req: Request<{ uuid: string }>, res: Res
 usersRoute.post('/users/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newUser = req.body
     const genero = req.body.genero
+    const nome = req.body.name
+    const nameSocial = req.body.nameSocial
+    newUser.name = nome[0].toUpperCase() + nome.slice(1,nome.length).toLowerCase()
+    newUser.nameSocial = nameSocial[0].toUpperCase() + nameSocial.slice(1,nameSocial.length).toLowerCase()
     
     if(genero[0].toUpperCase() == 'M'){
         newUser.genero = "Masculino"
@@ -62,8 +66,9 @@ usersRoute.post('/users/cadastrar', async (req: Request, res: Response, next: Ne
     }
     
     await users.create(newUser)
-    .then(() =>{
+    .then((test) =>{
         return res.json({
+            id: test.id,
             erro: false,
             mensagem: "Usuario cadastrado com sucesso!"
         })
@@ -79,6 +84,20 @@ usersRoute.put('/users/modificar/:uuid', async(req: Request<{ uuid: string }>, r
     const uuid = req.params.uuid;
     const modifiedUser = req.body;
     modifiedUser.uuid = uuid
+
+    const genero = req.body.genero
+    const nome = req.body.name
+    const nameSocial = req.body.nameSocial
+    modifiedUser.name = nome[0].toUpperCase() + nome.slice(1,nome.length).toLowerCase()
+    modifiedUser.nameSocial = nameSocial[0].toUpperCase() + nameSocial.slice(1,nameSocial.length).toLowerCase()
+    
+    if(genero[0].toUpperCase() == 'M'){
+        modifiedUser.genero = "Masculino"
+    }else if(genero[0].toUpperCase() == 'F'){
+        modifiedUser.genero = "Feminino"
+    }else{
+        modifiedUser.genero = null
+    }
     await users.update(modifiedUser, {
         where: {
             id: uuid

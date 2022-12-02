@@ -24,9 +24,20 @@ const users = database.define('users', {
         allowNull: false
     },
     cpf: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    ddd: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    telefone: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    rg: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 })
 

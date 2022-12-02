@@ -354,7 +354,7 @@ export default class FormularioAtualizaCliente extends Component<any,state> {
                             </div>
                             <div className="row">
                                 <div className="col s12">
-                                    <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Cadastrar Cliente
+                                    <button className="btn waves-effect waves-light" style={backgroundColor} type="submit" name="action" onClick={this.postClickButton}>Atualizar Cliente
                                         <i className="material-icons right">send</i>
                                     </button>
                                 </div>

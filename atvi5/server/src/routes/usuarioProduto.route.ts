@@ -51,17 +51,17 @@ usuarioProdutoRoute.get('/usuarioProduto/ClienteConsumoValor', async(req: Reques
                     consumo: s
                 })
             }
-            s = v
+            s = Number(v)
             n1 = n
             cont = 1
             c++
         }
         else{
-            v1 = v
+            v1 = Number(v)
             if(produ.length >= c){
-                s = s + v
+                s = Number(s) + Number(v)
             }else{
-                s = v + v1
+                s = Number(v) + Number(v1)
             }
             cont++
             c++
@@ -346,7 +346,7 @@ usuarioProdutoRoute.delete('/usuarioProduto/deletar/:uuid', async(req: Request<{
     const uuid = req.params.uuid;
     await usuarioProduto.destroy({
         where: {
-            id: uuid
+            produtoId: uuid
           }
     })
     .then(() =>{
@@ -362,5 +362,24 @@ usuarioProdutoRoute.delete('/usuarioProduto/deletar/:uuid', async(req: Request<{
     })
 })
 
+usuarioProdutoRoute.delete('/usuarioProduto/deletar/usu/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
+    const uuid = req.params.uuid;
+    await usuarioProduto.destroy({
+        where: {
+            userId: uuid
+          }
+    })
+    .then(() =>{
+        return res.json({
+            erro: false,
+            mensagem: "usuarioProduto deletado com sucesso!"
+        })
+    }).catch(() =>{
+        return res.status(StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "usuarioProduto não deletado!"
+        })
+    })
+})
 
 export default usuarioProdutoRoute;
