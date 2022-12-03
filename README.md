@@ -14,6 +14,8 @@ Se você estiver usando o windows, abra o gitBash e execute o comando:
 
 Quando o script ambiente.sh estiver sendo executado ira aparecer as seguintes opções:
 
+![op](https://github.com/mateushlsilva/atvi1-POO/blob/main/imagens/op.png)
+
 A opção 1 vai rodar a atvi1</br>
 A opção 2 vai rodar a atvi2</br>
 A opção 3 vai rodar a atvi3</br>
